@@ -86,9 +86,9 @@ VALUES
 -- -- Table structure for table `Visits`
 -- --
 
-DROP TABLE IF EXISTS `Visits`;
+DROP TABLE IF EXISTS `MemberVisits`;
 
-CREATE TABLE `Visits`
+CREATE TABLE `MemberVisits`
 (
     `visitID` int(11) NOT NULL AUTO_INCREMENT,
     `memberID` int(11) NOT NULL,
@@ -101,7 +101,7 @@ CREATE TABLE `Visits`
 -- --
 -- -- Inserting data for table `Visits`
 -- --
-INSERT INTO `Visits` 
+INSERT INTO `MemberVisits` 
 (
     `memberID`,
     `date`
