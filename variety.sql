@@ -202,7 +202,7 @@ CREATE TABLE `Classes_Members`
     `memberID` int(11),
     `classID` int(11),
     PRIMARY KEY(`classMemberID`),
-    FOREIGN KEY(`memberID`) references Members(`memberID`) ON DELETE CASCADE,
+    FOREIGN KEY(`memberID`) references Members(`memberID`) ON DELETE SET NULL,
     FOREIGN KEY(`classID`) references Classes(`classID`) ON DELETE CASCADE
 );
 
