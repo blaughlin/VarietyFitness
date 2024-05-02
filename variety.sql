@@ -16,7 +16,7 @@ CREATE TABLE `Members`
     `phone` varchar(10) NOT NULL,
     `membershipStartDate` DATE NOT NULL,
     `monthlyDues` decimal(5,2) NOT NULL,
-    `creditCardNumber` int(16) NOT NULL,
+    `creditCardNumber` bigint NOT NULL,
     `expirationMonth` int(2) NOT NULL,
     `expirationYear` int(4) NOT NULL,
     `paymentCurrent` BOOLEAN,
