@@ -64,5 +64,42 @@
     </tr>
     </table>
     <button type="button">Add new member</button>
+
+<div id="insert">
+    <p>&nbsp;</p>
+    <form method="POST" id="addMember">
+        <legend><strong>Add Member</strong></legend>
+        <fieldset class = "field">
+            <label>First Name</label> <input type = "text" name = "firstName"/>
+            <label>Last Name</label> <input type = "text" name = "lastName"/>
+            <label>Email</label> <input type = "email" name = "email"/>
+            <label>Phone</label> <input type = "text" name = "phone"/>
+            <label>Membership Start Date</label> <input type = "text" name = "membershipStartDate"/>
+            <label>Monthly due</label> <input type = "text" name = "monthlyDues"/>
+            <label>Credit Card Number</label> <input type = "text" name = "creditCardNumber"/>
+            <label>Expiration Month</label> <input type = "text" name = "expirationMonth"/>
+            <label>Expiration Year</label> <input type = "text" name = "expirationYear"/>
+            <label>Payment Current</label>
+            <select name = "current">
+                <option value = "0">No</option>
+                <option value = "1" selected>Yes</option>
+            </select>
+            </fieldset>
+            <input class = "btn" type="submit" id= "addMemberBtn" value="Add Person">
+            <input class = "btn" type="submit" id= "addMemberBtn" value="Cancel">
+    </form>
+
+
+
+
+
+
+
+
+
+        </fieldset>
+    </form>
+
+</div>
 </body>
 </html>
