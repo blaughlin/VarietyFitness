@@ -3,13 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' type='text/css' media='screen' href='../main.css'>
     <title>Employees</title>
 </head>
 <body>
+    <main>
     [<a href ="../index.html">Home</a> | <a href ="members.html">Members</a> | <a href ="classes.html">Classes</a> | <a href ="class-members.html">Class-Members</a> | <a href ="employees.html">Employees</a> |
     <a href ="invoices.html">Invoices</a> | <a href ="member-visits.html">Member Visits</a>]
     <h1>Employees</h1>
-
+    <div class="scrollable">
     <table>
     <tr>
         <th>employeeID</th>
@@ -52,6 +54,7 @@
         <td>Fitness Instructor</td>
     </tr>
     </table>
+    </div>
     <button type="button">Add new employee</button>
 
 <div id="insert">
@@ -59,16 +62,29 @@
     <form method="POST" id="addEmployee">
         <legend><strong>Add Employee</strong></legend>
         <fieldset class = "field">
-            <label>First Name</label> <input type = "text" name = "firstName"/>
-            <label>Last Name</label> <input type = "text" name = "lastName"/>
-            <label>Hire Date</label> <input type = "text" name = "hireDate"/>
-            <label>Hourly Rate</label> <input type = "text" name = "hourlyRate"/>
-            <label>Membership Start Date</label> <input type = "text" name = "membershipStartDate"/>
-            <label>Job Title</label> <input type = "text" name = "jobTitle"/>
+            <label>First Name
+                <input type = "text" name = "firstName"/>
+            </label>
+            <label>Last Name
+                <input type = "text" name = "lastName"/>
+            </label>
+            <label>Hire Date
+                <input type = "text" name = "hireDate"/>
+            </label> 
+            <label>Hourly Rate
+                <input type = "text" name = "hourlyRate"/>
+            </label> 
+            <label>Membership Start Date
+                <input type = "text" name = "membershipStartDate"/>
+            </label> 
+            <label>Job Title
+                <input type = "text" name = "jobTitle"/>
+            </label> 
             </fieldset>
             <input class = "btn" type="submit" id= "addMemberBtn" value="Add Employee">
             <input class = "btn" type="submit" id= "addMemberBtn" value="Cancel">
     </form>
 </div>
+</main>
 </body>
 </html>
