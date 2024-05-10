@@ -73,6 +73,7 @@
             <label>Class Date</label> <input type = "text" name = "classDate"/>
             <label>Start Time</label> <input type = "text" name = "startTime"/>
             <label>End Time</label> <input type = "text" name = "endTime"/>
+            <label>Room Number</label> <input type = "text" name = "roomNumber"/>
             </fieldset>
             <input class = "btn" type="submit" id= "addClassBtn" value="Add Class">
             <input class = "btn" type="submit" id= "cancelBtn" value="Cancel">
@@ -80,11 +81,52 @@
 
 <div id="update">
     <p>&nbsp;</p>
+    <form method="POST" id="adClass">
+        <legend><strong>Update Class</strong></legend>
+        <fieldset class = "field">
+            <label>ClassId: 1</label>
+            <label>Instructor</label>
+            <select name = "employeeID">
+                <option value = "1" selected>Steve Smith</option>
+                <option value = "2">Julie Moore</option>
+                <option value = "3">Paul Green</option>
+                <option value = "4">Mary Star</option>
+                <option value = "NULL">NULL</option>
+            </select>
+            <label>Class Description</label> <input type = "text" name = "classDescription" value="Zumba"/>
+
+            <label>Class Date</label> <input type = "text" name = "classDate" value = "2024-05-01"/>
+            <label>Start Time</label> <input type = "text" name = "startTime", value = "11:00:00"/>
+            <label>End Time</label> <input type = "text" name = "endTime" value = "11:30:00"/>
+            <label>Room Number</label> <input type = "text" name = "roomNumber" value="1"/>
+
+            </fieldset>
+            <input class = "btn" type="submit" id= "addClassBtn" value="Update Class">
+            <input class = "btn" type="submit" id= "cancelBtn" value="Cancel">
+    </form>
 </div>
 
 
 <div id="delete">
     <p>&nbsp;</p>
+    <form method="POST" id="adClass">
+        <legend><strong>Delete Class</strong></legend>
+        <fieldset class = "field">
+            <label>Are you sure you want to delete the following:</label>
+            <br>
+            <label><strong>ClassID:</strong> 1</label>
+            <label><strong>Instructor:</strong>Steve Smith</label>
+
+            <label><strong>Description:</strong>Zumba</label>
+
+            <label><strong >Date:</strong>2024-05-01</label> 
+            <label><strong>Start Time</strong>11:00:00</label> 
+            <label><strong>End Time:</strong>11:30:00</label> 
+            <label><strong>Room Number:</strong>1</label> 
+            </fieldset>
+            <input class = "btn" type="submit" id= "addClassBtn" value="Delete Class">
+            <input class = "btn" type="submit" id= "cancelBtn" value="Cancel">
+    </form>
 </div>
 </body>
 </html>
