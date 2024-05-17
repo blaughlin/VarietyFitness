@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Invoices</h1>
+    <table>
+        <tr>
+            <th>InvoiceID</th>
+            <th>memberID</th>
+            <th>date</th>
+            <th>amountDue</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>1</td>
+            <td>2024-05-01</td>
+            <td>70.00</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>3</td>
+            <td>2024-05-01</td>
+            <td>65.00</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>3</td>
+            <td>2024-05-01</td>
+            <td>63.00</td>
+        </tr>
+    </table>
+    <button type="button">Add new invoice</button>
+
+    <div id="insert">
+        <p>&nbsp;</p>
+        <form method="POST" id="addInovice">
+            <legend><strong>Add Invoice</strong></legend>
+            <fieldset class="field">
+                <label>Member</label>
+                <select name="memberID">
+                    <option value="1">John Smith</option>
+                    <option value="2">Sarah Mills</option>
+                    <option value="3">Ben Smith</option>
+                </select>
+                <label>Date</label> <input type="text" name="date" />
+                <label>Amount Due</label> <input type="text" name="amountDue" />
+            </fieldset>
+            <input class="btn" type="submit" id="addInvoiceBtn" value="Add Invoice">
+            <input class="btn" type="submit" id="cancelBtn" value="Cancel">
+        </form>
+{% endblock %}

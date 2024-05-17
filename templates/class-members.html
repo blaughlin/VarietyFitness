@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Class-Members</h1>
+    <table>
+        <tr>
+            <th>classMemberID</th>
+            <th>memberID</th>
+            <th>classID</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>3</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>1</td>
+            <td>3</td>
+        </tr>
+    </table>
+    <button type="button">Add member to class</button>
+
+    <div id="insert">
+        <p>&nbsp;</p>
+        <form method="POST" id="assClassMember">
+            <legend><strong>Add Class Member</strong></legend>
+            <fieldset class="field">
+                <label>Member</label>
+                <select name="memberID">
+                    <option value="1">John Smith</option>
+                    <option value="2">Sarah Mills</option>
+                    <option value="3">Ben Smith</option>
+                </select>
+                <select name="memberID">
+                    <option value="1">Zumba 2024-05-01 11:00:00</option>
+                    <option value="2">Zumba 2024-05-05 11:00:00</option>
+                    <option value="3">Yoga Flow 2024-05-01 10:0000</option>
+                </select>
+            </fieldset>
+            <input class="btn" type="submit" id="addClassMemberBtn" value="Add member to class">
+            <input class="btn" type="submit" id="cancelBtn" value="Cancel">
+        </form>
+{% endblock %}

@@ -161,14 +161,14 @@ DROP TABLE IF EXISTS `Classes`;
 CREATE TABLE `Classes`
 (
     `classID` int(11) NOT NULL AUTO_INCREMENT,
-    `employeeID` int(11) NOT NULL,
+    `employeeID` int(11),
     `classDescription` varchar(500) NOT NULL,
     `classDate` DATE NOT NULL,
     `startTime` TIME NOT NULL,
     `endTime` TIME NOT NULL,
     `roomNumber` int NOT NULL,
     PRIMARY KEY(`classID`),
-    FOREIGN KEY(`employeeID`) references Employees(`employeeID`) ON DELETE CASCADE
+    FOREIGN KEY(`employeeID`) references Employees(`employeeID`) ON DELETE SET NULL
 );
 
 -- --
@@ -203,7 +203,7 @@ CREATE TABLE `Classes_Members`
     `classID` int(11),
     PRIMARY KEY(`classMemberID`),
     FOREIGN KEY(`memberID`) references Members(`memberID`) ON DELETE SET NULL,
-    FOREIGN KEY(`classID`) references Classes(`classID`) ON DELETE CASCADE
+    FOREIGN KEY(`classID`) references Classes(`classID`) ON DELETE SET NULL
 );
 
 -- --

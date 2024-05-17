@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+
+    <title>Variety Fitness</title>
+</head>
+<body>
+    [<a href="/">Home</a> | <a href="/members">Members</a> | <a href="/classes">Classes</a>
+    <a href="/class-members">Class-Members</a> | <a href="employees">Employees</a> |
+    <a href="invoices">Invoices</a> | <a href="member-visits">Member Visits</a>]
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

@@ -1,15 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=>, initial-scale=1.0">
-    <link rel='stylesheet' type='text/css' media='screen' href='../main.css'>
-    <title>Document</title>
-</head>
-<body>
-<main>
-    [<a href ="../index.html">Home</a> | <a href ="members.html">Members</a> | <a href ="classes.html">Classes</a> | <a href ="class-members.html">Class-Members</a> | <a href ="employees.html">Employees</a> |
-    <a href ="invoices.html">Invoices</a> | <a href ="member-visits.html">Member Visits</a>]
+{% extends "base.html" %}
+{% block content %}
     <h1>Members</h1>
     <div class="scrollable">
     <table>
@@ -93,18 +83,5 @@
             <input class = "btn" type="submit" id= "cancelBtn" value="Cancel">
     </form>
 
-
-
-
-
-
-
-
-
-        </fieldset>
-    </form>
-
 </div>
-</main>
-</body>
-</html>
+{% endblock %}

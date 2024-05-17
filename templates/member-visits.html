@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Member Visits</h1>
+    <table>
+        <tr>
+            <th>visitID</th>
+            <th>memberID</th>
+            <th>date</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>1</td>
+            <td>2024-05-01</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>2</td>
+            <td>2024-05-01</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>2</td>
+            <td>2024-05-02</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>1</td>
+            <td>2024-05-03</td>
+        </tr>
+    </table>
+    <button type="button">Add visit</button>
+
+    <div id="insert">
+        <p>&nbsp;</p>
+        <form method="POST" id="addMemberVist">
+            <legend><strong>Add Member Visit</strong></legend>
+            <fieldset class="field">
+                <label>Member</label>
+                <select name="memberID">
+                    <option value="1">John Smith</option>
+                    <option value="2">Sarah Mills</option>
+                    <option value="3">Ben Smith</option>
+                </select>
+                <label>Date</label> <input type="text" name="date" />
+            </fieldset>
+            <input class="btn" type="submit" id="addMemberVisitBtn" value="Add Member Visit">
+            <input class="btn" type="submit" id="cancelBtn" value="Cancel">
+        </form>
+{% endblock %}
