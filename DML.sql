@@ -1,5 +1,5 @@
 -- Query to select all Members and display name as one column ---
-SELECT memberID, Concat(firstName ," ", lastName) as name, email, phone, membershipStartDate, monthlyDues, creditCardNumber, expirationMonth, expirationYear, paymentCurrent
+SELECT memberID, Concat(firstName ,' ', lastName) as name, email, phone, membershipStartDate, monthlyDues, creditCardNumber, expirationMonth, expirationYear, paymentCurrent
 FROM Members;
 
 -- Query to select member by ID---

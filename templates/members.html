@@ -1,9 +1,39 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1>Members</h1>
-    <div class="scrollable">
+<h1>Members</h1>
+<div class="scrollable">
     <table>
-    <tr>
+        <thead>
+            <tr>
+                <th>Member ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Membership Start Date</th>
+                <th>Monthly Dues</th>
+                <th>Credit Card</th>
+                <th>Expiration Month</th>
+                <th>Expiration Year</th>
+                <th>Payment Currert</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in data %}
+            <tr>
+                <td>{{item['memberID']}}</td>
+                <td>{{item['name']}}</td>
+                <td>{{item['email']}}</td>
+                <td>{{item['phone']}}</td>
+                <td>{{item['membershipStartDate']}}</td>
+                <td>{{item['monthlyDues']}}</td>
+                <td>{{item['creditCardNumber']}}</td>
+                <td>{{item['expirationMonth']}}</td>
+                <td>{{item['expirationYear']}}</td>
+                <td>{{item['paymentCurrent']}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <!-- <tr>
         <th>memberID</th>
         <th>firstName</th>
         <th>lastName</th>
@@ -54,33 +84,33 @@
         <td>2</td>
         <td>2025</td>
         <td>1</td>
-    </tr>
+    </tr> -->
     </table>
-    </div>
-    <button type="button">Add new member</button>
+</div>
+<button type="button">Add new member</button>
 
 <div id="insert">
     <p>&nbsp;</p>
     <form method="POST" id="addMember">
         <legend><strong>Add Member</strong></legend>
-        <fieldset class = "field">
-            <label>First Name</label> <input type = "text" name = "firstName"/>
-            <label>Last Name</label> <input type = "text" name = "lastName"/>
-            <label>Email</label> <input type = "email" name = "email"/>
-            <label>Phone</label> <input type = "text" name = "phone"/>
-            <label>Membership Start Date</label> <input type = "text" name = "membershipStartDate"/>
-            <label>Monthly due</label> <input type = "text" name = "monthlyDues"/>
-            <label>Credit Card Number</label> <input type = "text" name = "creditCardNumber"/>
-            <label>Expiration Month</label> <input type = "text" name = "expirationMonth"/>
-            <label>Expiration Year</label> <input type = "text" name = "expirationYear"/>
+        <fieldset class="field">
+            <label>First Name</label> <input type="text" name="firstName" />
+            <label>Last Name</label> <input type="text" name="lastName" />
+            <label>Email</label> <input type="email" name="email" />
+            <label>Phone</label> <input type="text" name="phone" />
+            <label>Membership Start Date</label> <input type="text" name="membershipStartDate" />
+            <label>Monthly due</label> <input type="text" name="monthlyDues" />
+            <label>Credit Card Number</label> <input type="text" name="creditCardNumber" />
+            <label>Expiration Month</label> <input type="text" name="expirationMonth" />
+            <label>Expiration Year</label> <input type="text" name="expirationYear" />
             <label>Payment Current</label>
-            <select name = "current">
-                <option value = "0">No</option>
-                <option value = "1" selected>Yes</option>
+            <select name="current">
+                <option value="0">No</option>
+                <option value="1" selected>Yes</option>
             </select>
-            </fieldset>
-            <input class = "btn" type="submit" id= "addMemberBtn" value="Add Person">
-            <input class = "btn" type="submit" id= "cancelBtn" value="Cancel">
+        </fieldset>
+        <input class="btn" type="submit" id="addMemberBtn" value="Add Person">
+        <input class="btn" type="submit" id="cancelBtn" value="Cancel">
     </form>
 
 </div>
