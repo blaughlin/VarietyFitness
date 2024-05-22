@@ -23,15 +23,34 @@ def root():
 
 @app.route('/members', methods = ['POST', 'GET'])
 def members():
-    print("in members")
     if request.method == "GET":
-        print("in GET")
         query = "SELECT memberID, CONCAT(firstName ,' ', lastName) as name, email, phone, membershipStartDate, monthlyDues, creditCardNumber, expirationMonth, expirationYear, paymentCurrent FROM Members"
         cur = mysql.connection.cursor()
         cur.execute(query)
         data = cur.fetchall()
         print(data)
         return render_template("members.html", data = data)
+    if request.method == "POST":
+        print("in POST")
+        if request.form.get("addMember"):
+            print("Trying to add member")
+            firstName = request.form["firstName"]
+            lastName = request.form["lastName"]
+            email = request.form["email"]
+            phone = request.form["phone"]
+            membershipStartDate = request.form["membershipStartDate"]
+            monthlyDues = request.form["monthlyDues"]
+            creditCardNumber = request.form["creditCardNumber"]
+            expirationMonth = request.form["expirationMonth"]
+            expirationYear = request.form["expirationYear"]
+            current = request.form["current"]
+
+            query = "INSERT INTO Members (firstName, lastName, email, phone, membershipStartDate, monthlyDues, creditCardNumber, expirationMonth, expirationYear, paymentCurrent) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+            cur = mysql.connection.cursor()
+            cur.execute(query, (firstName, lastName, email, phone, membershipStartDate, monthlyDues, creditCardNumber, expirationMonth, expirationYear, current))
+            mysql.connection.commit()
+
+            return redirect("/members")
 
 @app.route('/classes')
 def classes():
@@ -56,5 +75,5 @@ def invoices():
 # Listener
 
 if __name__ == "__main__":
-    port = int(os.environ.get('PORT', 2389))
+    port = int(os.environ.get('PORT', 2382))
     app.run(port=port, debug=True)
