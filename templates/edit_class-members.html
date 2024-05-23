@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Edit Class-Member</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Class-Member ID</th>
+            <th>Member</th>
+            <th>Class</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in data %}
+        <tr>
+            <td>{{item['classMemberID']}}</td>
+            <td>{{item['member']}}</td>
+            <td>{{item['class']}}</td>
+        </tr>
+        {% endfor %}
+
+    </tbody>
+</table>
+
+<div id="update">
+    <p>&nbsp;</p>
+    <form method="POST" id="editClassMember">
+        <legend><strong>Update Class Member</strong></legend>
+        <fieldset class="field">
+            {% for item in data %}
+            <label>ClassMember: {{item['classMemberID']}} </label>
+            {% endfor %}
+            <label>Member</label>
+            <select name="memberID">
+                {% for member in members %}
+                {% if member['member'] == data[0].member %}
+                <option value="{{member['memberID']}}" selected>{{member['member']}}</option>
+                {% else %}
+                <option value="{{member['memberID']}}">{{member['member']}}</option>
+                {% endif %}
+
+                {% endfor %}
+            </select>
+            <label>Class</label>
+            <select name="classID">
+                {% for class in classes %}
+                {% if class['class'] == data[0].class %}
+                <option value="{{class['classID']}}" selected>{{class['class']}}</option>
+                {% else %}
+                <option value="{{class['classID']}}">{{class['class']}}</option>
+                {% endif %}
+                {% endfor %}
+            </select>
+        </fieldset>
+        <input class="btn" type="submit" name="editClassMember" id="editlassMemberBtn" value="Update ClassMember">
+    </form>
+</div>
+
+</body>
+{% endblock %}

@@ -31,9 +31,7 @@ def members():
         print(data)
         return render_template("members.html", data = data)
     if request.method == "POST":
-        print("in POST")
         if request.form.get("addMember"):
-            print("Trying to add member")
             firstName = request.form["firstName"]
             lastName = request.form["lastName"]
             email = request.form["email"]
@@ -56,10 +54,47 @@ def members():
 def classes():
     return render_template("classes.html")
 
-@app.route('/class-members')
+@app.route('/class-members',  methods = ['POST', 'GET'])
 def classMembeers():
-    return render_template("class-members.html")
+        if request.method == "GET":
+            query = "SELECT Classes_Members.classMemberID, Concat(Members.firstName, ' ', Members.lastName) as member, Concat(Classes.classDescription, ' ' ,Classes.classDate, ' ', Classes.startTime) as class from Classes_Members inner join Members on Classes_Members.memberID = Members.memberID inner join Classes on Classes_Members.classID = Classes.classID"
+            cur = mysql.connection.cursor()
+            cur.execute(query)
+            data = cur.fetchall()
+            print(data)
+            return render_template("class-members.html", data = data)
 
+@app.route('/edit_classMembers/<int:id>',  methods = ['POST', 'GET'])
+def editClassMembers(id):
+    print("in edit")
+    if request.method == "GET":
+        query = "SELECT Classes_Members.classMemberID, Concat(Members.firstName, ' ', Members.lastName) as member, Concat(Classes.classDescription, ' ' ,Classes.classDate, ' ', Classes.startTime) as class from Classes_Members inner join Members on Classes_Members.memberID = Members.memberID inner join Classes on Classes_Members.classID = Classes.classID WHERE classMemberID = %s" % (id)
+        cur = mysql.connection.cursor()
+        cur.execute(query)
+        data = cur.fetchall()
+        print(data)
+        query = "SELECT memberID, Concat(firstName, ' ', lastName) as member FROM Members"
+        cur = mysql.connection.cursor()
+        cur.execute(query)
+        members = cur.fetchall()
+        query = "SELECT classID, Concat(classDescription, ' ', classDate, ' ', startTime) as class FROM Classes"
+        cur = mysql.connection.cursor()
+        cur.execute(query)
+        classes = cur.fetchall()
+        print(classes)
+        return render_template("edit_class-members.html", data = data, members = members, classes= classes)
+    if request.method == "POST":
+        if request.form.get("editClassMember"):
+            print('editing class member')
+            memberID = request.form["memberID"]
+            classID = request.form["classID"]
+            print(memberID, classID, id)
+            query = "UPDATE Classes_Members SET memberID = %s, classID = %s WHERE classMemberID = %s"
+            cur = mysql.connection.cursor()
+            cur.execute(query, (memberID, classID, id))
+            mysql.connection.commit()
+            return redirect("/class-members")
+        
 @app.route('/member-visits')
 def membeerVisits():
     return render_template("member-visits.html")
@@ -75,5 +110,5 @@ def invoices():
 # Listener
 
 if __name__ == "__main__":
-    port = int(os.environ.get('PORT', 2382))
+    port = int(os.environ.get('PORT', 2389))
     app.run(port=port, debug=True)

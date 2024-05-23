@@ -1,57 +1,56 @@
 {% extends "base.html" %}
 {% block content %}
-      <h1>Class-Members</h1>
-    <table>
+<h1>Class-Members</h1>
+<table>
+    <thead>
         <tr>
-            <th>classMemberID</th>
-            <th>memberID</th>
-            <th>classID</th>
+            <th>Class-MemberID</th>
+            <th>Member</th>
+            <th>Class</th>
+            <th>edit</th>
         </tr>
+    </thead>
+    <tbody>
+        {% for item in data %}
         <tr>
-            <td>1</td>
-            <td>1</td>
-            <td>1</td>
+            <td>{{item['classMemberID']}}</td>
+            <td>{{item['member']}}</td>
+            <td>{{item['class']}}</td>
+            <td><a href="/edit_classMembers/{{item['classMemberID']}}">edit</a></td>
         </tr>
-        <tr>
-            <td>2</td>
-            <td>3</td>
-            <td>1</td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>1</td>
-            <td>3</td>
-        </tr>
-    </table>
-    <button type="button">Add member to class</button>
+        {% endfor %}
 
-    <div id="insert">
+    </tbody>
+</table>
+<button type="button">Add member to class</button>
+
+<div id="insert">
+    <p>&nbsp;</p>
+    <form method="POST" id="assClassMember">
+        <legend><strong>Add Class Member</strong></legend>
+        <fieldset class="field">
+            <label>Member</label>
+            <select name="memberID">
+                <option value="1">John Smith</option>
+                <option value="2">Sarah Mills</option>
+                <option value="3">Ben Smith</option>
+            </select>
+            <select name="classID">
+                <option value="1">Zumba 2024-05-01 11:00:00</option>
+                <option value="2">Zumba 2024-05-05 11:00:00</option>
+                <option value="3">Yoga Flow 2024-05-01 10:0000</option>
+            </select>
+        </fieldset>
+        <input class="btn" type="submit" id="addClassMemberBtn" value="Add member to class">
+        <input class="btn" type="submit" id="cancelBtn" value="Cancel">
+    </form>
+
+    <div id="update">
         <p>&nbsp;</p>
-        <form method="POST" id="assClassMember">
-            <legend><strong>Add Class Member</strong></legend>
+        <form method="POST" id="adClass">
+            <legend><strong>Update Class Member</strong></legend>
             <fieldset class="field">
-                <label>Member</label>
-                <select name="memberID">
-                    <option value="1">John Smith</option>
-                    <option value="2">Sarah Mills</option>
-                    <option value="3">Ben Smith</option>
-                </select>
-                <select name="classID">
-                    <option value="1">Zumba 2024-05-01 11:00:00</option>
-                    <option value="2">Zumba 2024-05-05 11:00:00</option>
-                    <option value="3">Yoga Flow 2024-05-01 10:0000</option>
-                </select>
-            </fieldset>
-            <input class="btn" type="submit" id="addClassMemberBtn" value="Add member to class">
-            <input class="btn" type="submit" id="cancelBtn" value="Cancel">
-        </form>
-
-        <div id="update">
-            <p>&nbsp;</p>
-            <form method="POST" id="adClass">
-                <legend><strong>Update Class Member</strong></legend>
-                <fieldset class="field">
-                    <label>ClassMember: 1</label>
+                <label>ClassMember: 1</label>
                 <label>Member</label>
                 <select name="memberID">
                     <option value="1" selected>John Smith</option>
@@ -59,32 +58,32 @@
                     <option value="3">Ben Smith</option>
                 </select>
                 <label>Class</label>
-                    <select name="classID">
-                        <option value="1">Zumba 2024-05-01 11:00:00</option>
-                        <option value="2">Zumba 2024-05-05 11:00:00</option>
-                        <option value="3">Yoga Flow 2024-05-01 10:0000</option>
-                    </select>
-                </fieldset>
-                <input class="btn" type="submit" id="addClassMemberBtn" value="Update ClassMember">
-                <input class="btn" type="submit" id="cancelBtn" value="Cancel">
-            </form>
-        </div>
+                <select name="classID">
+                    <option value="1">Zumba 2024-05-01 11:00:00</option>
+                    <option value="2">Zumba 2024-05-05 11:00:00</option>
+                    <option value="3">Yoga Flow 2024-05-01 10:0000</option>
+                </select>
+            </fieldset>
+            <input class="btn" type="submit" id="addClassMemberBtn" value="Update ClassMember">
+            <input class="btn" type="submit" id="cancelBtn" value="Cancel">
+        </form>
+    </div>
 
-        <div id="delete">
-            <p>&nbsp;</p>
-            <form method="POST" id="deleteClassMember">
-                <legend><strong>Delete Class Member</strong></legend>
-                <fieldset class="field">
-                    <label>Are you sure you want to delete the following:</label>
-                    <br>
-                    <label><strong>ClassMemberID</strong> 1</label>
-                    <label><strong>Member:</strong>Steve Smith</label>
+    <div id="delete">
+        <p>&nbsp;</p>
+        <form method="POST" id="deleteClassMember">
+            <legend><strong>Delete Class Member</strong></legend>
+            <fieldset class="field">
+                <label>Are you sure you want to delete the following:</label>
+                <br>
+                <label><strong>ClassMemberID</strong> 1</label>
+                <label><strong>Member:</strong>Steve Smith</label>
 
-                    <label><strong>Classs:</strong>Zumba 024-05-01 11:00:00 </label>
-                </fieldset>
-                <input class="btn" type="submit" id="deleteClassBtn" value="Delete Class">
-                <input class="btn" type="submit" id="cancelBtn" value="Cancel">
-            </form>
-        </div>
-</body>
-{% endblock %}
+                <label><strong>Classs:</strong>Zumba 024-05-01 11:00:00 </label>
+            </fieldset>
+            <input class="btn" type="submit" id="deleteClassBtn" value="Delete Class">
+            <input class="btn" type="submit" id="cancelBtn" value="Cancel">
+        </form>
+    </div>
+    </body>
+    {% endblock %}
