@@ -50,15 +50,43 @@ def members():
 
             return redirect("/members")
 
-@app.route('/classes')
+@app.route('/classes', methods = ['POST', 'GET'])
 def classes():
     if request.method == "GET":
         query = "SELECT Classes.classID, Concat(Employees.firstName, ' ', Employees.lastName) as instructor, Classes.classDescription, Classes.classDate, Classes.startTime, Classes.endTime, Classes.roomNumber FROM Classes left join Employees on Classes.employeeID = Employees.employeeID"
         cur = mysql.connection.cursor()
         cur.execute(query)
         data = cur.fetchall()
-        print(data)
-        return render_template("classes.html", data = data)
+        query = "SELECT employeeID, Concat(firstName, ' ', lastName) as instructor FROM Employees"
+        cur = mysql.connection.cursor()
+        cur.execute(query)
+        instructors = cur.fetchall()
+        return render_template("classes.html", data = data, instructors = instructors)
+    if request.method == "POST":
+        if request.form.get("addClass"):
+            employeeID = request.form["employeeID"]
+            classDescription = request.form["classDescription"]
+            classDate = request.form["classDate"]
+            startTime = request.form["startTime"]
+            endTime = request.form["endTime"]
+            roomNumber = request.form["roomNumber"]
+            if employeeID == "":
+                query = "INSERT INTO Classes (employeeID, classDescription, classDate, startTime, endTime, roomNumber) VALUES (NULL, %s, %s, %s, %s, %s)" 
+                cur = mysql.connection.cursor()
+                cur.execute(query, (classDescription, classDate, startTime, endTime, roomNumber))
+                mysql.connection.commit()
+                return redirect("/classes")
+            else:
+                query = "INSERT INTO Classes (employeeID, classDescription, classDate, startTime, endTime, roomNumber) VALUES (%s, %s, %s, %s, %s, %s)" 
+                cur = mysql.connection.cursor()
+                cur.execute(query, (employeeID, classDescription, classDate, startTime, endTime, roomNumber))
+                mysql.connection.commit()
+                return redirect("/classes")
+
+
+
+
+
 
 @app.route('/edit_class/<int:id>', methods = ['POST', 'GET'])
 def editClasses(id):
