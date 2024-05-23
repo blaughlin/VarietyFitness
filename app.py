@@ -83,9 +83,13 @@ def classes():
                 mysql.connection.commit()
                 return redirect("/classes")
 
-
-
-
+@app.route('/delete_class/<int:id>')
+def deleteClass(id):
+    query = "DELETE FROM Classes WHERE classID = '%s';"
+    cur = mysql.connection.cursor()
+    cur.execute(query, (id,))
+    mysql.connection.commit()
+    return redirect("/classes")
 
 
 @app.route('/edit_class/<int:id>', methods = ['POST', 'GET'])
