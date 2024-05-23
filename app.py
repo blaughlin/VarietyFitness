@@ -52,7 +52,50 @@ def members():
 
 @app.route('/classes')
 def classes():
-    return render_template("classes.html")
+    if request.method == "GET":
+        query = "SELECT Classes.classID, Concat(Employees.firstName, ' ', Employees.lastName) as instructor, Classes.classDescription, Classes.classDate, Classes.startTime, Classes.endTime, Classes.roomNumber FROM Classes left join Employees on Classes.employeeID = Employees.employeeID"
+        cur = mysql.connection.cursor()
+        cur.execute(query)
+        data = cur.fetchall()
+        print(data)
+        return render_template("classes.html", data = data)
+
+@app.route('/edit_class/<int:id>', methods = ['POST', 'GET'])
+def editClasses(id):
+    if request.method == "GET":
+        query = "SELECT Classes.classID, Concat(Employees.firstName, ' ', Employees.lastName) as instructor, Classes.classDescription, Classes.classDate, Classes.startTime, Classes.endTime, Classes.roomNumber FROM Classes left join Employees on Classes.employeeID = Employees.employeeID WHERE classID = %s" % (id)
+        cur = mysql.connection.cursor()
+        cur.execute(query)
+        data = cur.fetchall()
+        query = "SELECT employeeID, Concat(firstName, ' ', lastName) as instructor FROM Employees"
+        cur = mysql.connection.cursor()
+        cur.execute(query)
+        instructors = cur.fetchall()
+        return render_template("edit_classes.html", data = data, instructors = instructors)
+    if request.method == "POST":
+        if request.form.get("editClass"):
+            instructor = request.form['employeeID']
+            classDescription = request.form['classDescription']
+            classDate = request.form['classDate']
+            startTime = request.form['startTime']
+            endTime = request.form['endTime']
+            roomNumber = request.form['roomNumber']
+            print(instructor, classDescription, classDate, startTime, endTime, roomNumber)
+        if instructor == "":
+            # account for NULL instructor
+            query = "UPDATE Classes SET employeeID = NULL, classDescription = %s, classDate = %s, startTime = %s, endTime = %s, roomNumber = %s WHERE classID = %s"
+            cur = mysql.connection.cursor()
+            cur.execute(query, (classDescription, classDate, startTime, endTime, roomNumber, id))
+            mysql.connection.commit()
+            return redirect("/classes")
+        else: 
+            # account for instructor
+            query = "UPDATE Classes SET employeeID = %s, classDescription = %s, classDate = %s, startTime = %s, endTime = %s, roomNumber = %s WHERE classID = %s"
+            cur = mysql.connection.cursor()
+            cur.execute(query, (instructor, classDescription, classDate, startTime, endTime, roomNumber, id))
+            mysql.connection.commit()
+            return redirect("/classes")
+
 
 @app.route('/class-members',  methods = ['POST', 'GET'])
 def classMembeers():

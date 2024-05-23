@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Edit Class</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Class ID</th>
+            <th>Instructor</th>
+            <th>Class Description</th>
+            <th>Class Date</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Room Number</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in data %}
+        <tr>
+            <td>{{item['classID']}}</td>
+            <td>{{item['instructor']}}</td>
+            <td>{{item['classDescription']}}</td>
+            <td>{{item['classDate']}}</td>
+            <td>{{item['startTime']}}</td>
+            <td>{{item['endTime']}}</td>
+            <td>{{item['roomNumber']}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div id="update">
+    <p>&nbsp;</p>
+    <form method="POST" id="adClass">
+        <legend><strong>Update Class</strong></legend>
+        <fieldset class="field">
+            <label>ClassId: {{ data[0].classID }}</label>
+            <label>Instructor</label>
+            <select name="employeeID">
+                {% for instructor in instructors %}
+                {% if instructor['instructor'] == data[0].instructor %}
+                <option value="{{instructor['employeeID']}}" selected>{{instructor['instructor']}}</option>
+                {% else %}
+                <option value="{{instructor['employeeID']}}">{{instructor['instructor']}}</option>
+                {% endif %}
+                {% endfor %}
+                <option value=""></option>
+            </select>
+            <label>Class Description</label> <input type="text" name="classDescription"
+                value="{{data[0].classDescription}}" />
+            <label>Class Date</label> <input type="text" name="classDate" value="{{data[0].classDate}}" />
+            <label>Start Time</label> <input type="text" name="startTime" , value="{{data[0].startTime}}" />
+            <label>End Time</label> <input type="text" name="endTime" value="{{data[0].endTime}}" />
+            <label>Room Number</label> <input type="text" name="roomNumber" value="{{data[0].roomNumber}}" />
+
+        </fieldset>
+        <input class="btn" type="submit" name="editClass" id="addClassBtn" value="Update Class">
+    </form>
+</div>
+</body>
+{% endblock %}

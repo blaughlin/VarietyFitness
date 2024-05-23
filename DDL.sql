@@ -168,7 +168,7 @@ CREATE TABLE `Classes`
     `endTime` TIME NOT NULL,
     `roomNumber` int NOT NULL,
     PRIMARY KEY(`classID`),
-    FOREIGN KEY(`employeeID`) references Employees(`employeeID`) ON DELETE SET NULL
+    FOREIGN KEY(`employeeID`) references Employees(`employeeID`) ON DELETE SET NULL ON UPDATE SET NULL
 );
 
 -- --
