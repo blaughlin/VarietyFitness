@@ -1,3 +1,8 @@
+## CS340 Spring 2024 Project: Variety Fitness
+## Bernard Laughlin, Raul Preciado
+## 5/23/2024
+## Code based off of "https://github.com/osu-cs340-ecampus/flask-starter-app?tab=readme-ov-file"
+
 from flask import Flask, render_template, json, redirect
 from flask_mysqldb import MySQL
 from flask import request
@@ -27,7 +32,6 @@ def members():
         cur = mysql.connection.cursor()
         cur.execute(query)
         data = cur.fetchall()
-        print(data)
         return render_template("members.html", data = data)
     if request.method == "POST":
         if request.form.get("addMember"):
@@ -117,7 +121,6 @@ def editClasses(id):
             startTime = request.form['startTime']
             endTime = request.form['endTime']
             roomNumber = request.form['roomNumber']
-            print(instructor, classDescription, classDate, startTime, endTime, roomNumber)
         if instructor == "":
             # account for NULL instructor
             query = "UPDATE Classes SET employeeID = NULL, classDescription = %s, classDate = %s, startTime = %s, endTime = %s, roomNumber = %s WHERE classID = %s"
@@ -141,18 +144,15 @@ def classMembeers():
             cur = mysql.connection.cursor()
             cur.execute(query)
             data = cur.fetchall()
-            print(data)
             return render_template("class-members.html", data = data)
 
 @app.route('/edit_classMembers/<int:id>',  methods = ['POST', 'GET'])
 def editClassMembers(id):
-    print("in edit")
     if request.method == "GET":
         query = "SELECT Classes_Members.classMemberID, Concat(Members.firstName, ' ', Members.lastName) as member, Concat(Classes.classDescription, ' ' ,Classes.classDate, ' ', Classes.startTime) as class from Classes_Members inner join Members on Classes_Members.memberID = Members.memberID inner join Classes on Classes_Members.classID = Classes.classID WHERE classMemberID = %s" % (id)
         cur = mysql.connection.cursor()
         cur.execute(query)
         data = cur.fetchall()
-        print(data)
         query = "SELECT memberID, Concat(firstName, ' ', lastName) as member FROM Members"
         cur = mysql.connection.cursor()
         cur.execute(query)
@@ -161,14 +161,11 @@ def editClassMembers(id):
         cur = mysql.connection.cursor()
         cur.execute(query)
         classes = cur.fetchall()
-        print(classes)
         return render_template("edit_class-members.html", data = data, members = members, classes= classes)
     if request.method == "POST":
         if request.form.get("editClassMember"):
-            print('editing class member')
             memberID = request.form["memberID"]
             classID = request.form["classID"]
-            print(memberID, classID, id)
             query = "UPDATE Classes_Members SET memberID = %s, classID = %s WHERE classMemberID = %s"
             cur = mysql.connection.cursor()
             cur.execute(query, (memberID, classID, id))
