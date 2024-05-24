@@ -16,7 +16,6 @@ mysql = MySQL(app)
 
 
 # Routes 
-
 @app.route('/')
 def root():
     return render_template("main.j2")
@@ -83,14 +82,20 @@ def classes():
                 mysql.connection.commit()
                 return redirect("/classes")
 
-@app.route('/delete_class/<int:id>')
+@app.route('/delete_class/<int:id>', methods = ['POST', 'GET'])
 def deleteClass(id):
-    query = "DELETE FROM Classes WHERE classID = '%s';"
-    cur = mysql.connection.cursor()
-    cur.execute(query, (id,))
-    mysql.connection.commit()
-    return redirect("/classes")
-
+    if request.method == "GET":
+        query = "SELECT Classes.classID, Concat(Employees.firstName, ' ', Employees.lastName) as instructor, Classes.classDescription, Classes.classDate, Classes.startTime, Classes.endTime, Classes.roomNumber FROM Classes left join Employees on Classes.employeeID = Employees.employeeID WHERE classID = %s" % (id)
+        cur = mysql.connection.cursor()
+        cur.execute(query)
+        data = cur.fetchall()
+        return render_template('/delete_class.html', data = data)
+    elif request.method == "POST":
+        query = "DELETE FROM Classes WHERE classID = '%s';"
+        cur = mysql.connection.cursor()
+        cur.execute(query, (id,))
+        mysql.connection.commit()
+        return redirect("/classes")
 
 @app.route('/edit_class/<int:id>', methods = ['POST', 'GET'])
 def editClasses(id):

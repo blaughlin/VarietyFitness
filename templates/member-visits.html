@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1>Member Visits</h1>
+<h1>Member Visits</h1>
+<div id="database">
     <table>
         <tr>
             <th>visitID</th>
@@ -28,22 +29,22 @@
             <td>2024-05-03</td>
         </tr>
     </table>
-    <button type="button">Add visit</button>
+    <button type="button" onClick=showInserts()>Add visit</button>
+</div>
 
-    <div id="insert">
-        <p>&nbsp;</p>
-        <form method="POST" id="addMemberVist">
-            <legend><strong>Add Member Visit</strong></legend>
-            <fieldset class="field">
-                <label>Member</label>
-                <select name="memberID">
-                    <option value="1">John Smith</option>
-                    <option value="2">Sarah Mills</option>
-                    <option value="3">Ben Smith</option>
-                </select>
-                <label>Date</label> <input type="text" name="date" />
-            </fieldset>
-            <input class="btn" type="submit" id="addMemberVisitBtn" value="Add Member Visit">
-            <input class="btn" type="submit" id="cancelBtn" value="Cancel">
-        </form>
-{% endblock %}
+<div id="insert">
+    <p>&nbsp;</p>
+    <form method="POST" id="addMemberVist">
+        <legend><strong>Add Member Visit</strong></legend>
+        <fieldset class="field">
+            <label>Member</label>
+            <select name="memberID">
+                <option value="1">John Smith</option>
+                <option value="2">Sarah Mills</option>
+                <option value="3">Ben Smith</option>
+            </select>
+            <label>Date</label> <input type="text" name="date" />
+        </fieldset>
+        <input class="btn" type="submit" name="addMemberVisit" id="addMemberVisitBtn" value="Add Member Visit">
+    </form>
+    {% endblock %}

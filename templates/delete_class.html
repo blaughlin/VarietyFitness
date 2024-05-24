@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div id="delete">
+    <p>&nbsp;</p>
+    <form method="POST" id="adClass">
+        <legend><strong>Delete Class</strong></legend>
+        <fieldset class="field">
+            <label>Are you sure you want to delete the following:</label>
+            <br>
+            <label><strong>ClassID:</strong> {{data[0].classID}}</label>
+            <label><strong>Instructor:</strong>{{data[0].instructor}}</label>
+
+            <label><strong>Description:</strong>{{data[0].classDescription}}</label>
+
+            <label><strong>Date:</strong>{{data[0].classDate}}</label>
+            <label><strong>Start Time</strong>{{data[0].startTime}}</label>
+            <label><strong>End Time:</strong>{{data[0].endTime}}</label>
+            <label><strong>Room Number:</strong>{{data[0].roomNumber}}</label>
+        </fieldset>
+        <input class="btn" type="submit" name="deleteClass" id="deleteClassBtn" value="Delete Class">
+    </form>
+</div>
+{% endblock %}

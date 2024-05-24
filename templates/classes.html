@@ -1,38 +1,39 @@
 {% extends "base.html" %}
 {% block content %}
 <h1>Classes</h1>
-<table>
-    <thead>
-        <tr>
-            <th>Class ID</th>
-            <th>Instructor</th>
-            <th>Class Description</th>
-            <th>Class Date</th>
-            <th>Start Time</th>
-            <th>End Time</th>
-            <th>Room Number</th>
-            <th>edit</th>
-            <th>delete</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for item in data %}
-        <tr>
-            <td>{{item['classID']}}</td>
-            <td>{{item['instructor']}}</td>
-            <td>{{item['classDescription']}}</td>
-            <td>{{item['classDate']}}</td>
-            <td>{{item['startTime']}}</td>
-            <td>{{item['endTime']}}</td>
-            <td>{{item['roomNumber']}}</td>
-            <td><a href="/edit_class/{{item['classID']}}">edit</a></td>
-            <td><a href="/delete_class/{{item['classID']}}">delete</a></td>
-        </tr>
-        {% endfor %}
-    </tbody>
-
-</table>
-<button type="button">Add new class</button>
+<div id="database">
+    <table>
+        <thead>
+            <tr>
+                <th>Class ID</th>
+                <th>Instructor</th>
+                <th>Class Description</th>
+                <th>Class Date</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>Room Number</th>
+                <th>edit</th>
+                <th>delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in data %}
+            <tr>
+                <td>{{item['classID']}}</td>
+                <td>{{item['instructor']}}</td>
+                <td>{{item['classDescription']}}</td>
+                <td>{{item['classDate']}}</td>
+                <td>{{item['startTime']}}</td>
+                <td>{{item['endTime']}}</td>
+                <td>{{item['roomNumber']}}</td>
+                <td><a href="/edit_class/{{item['classID']}}">edit</a></td>
+                <td><a href="/delete_class/{{item['classID']}}">delete</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <button type="button" onClick=showInserts()>Add new class</button>
+</div>
 
 <div id="insert">
     <p>&nbsp;</p>
@@ -55,25 +56,4 @@
         <input class="btn" type="submit" name="addClass" id="addClassBtn" value="Add Class">
     </form>
 
-    <div id="delete">
-        <p>&nbsp;</p>
-        <form method="POST" id="adClass">
-            <legend><strong>Delete Class</strong></legend>
-            <fieldset class="field">
-                <label>Are you sure you want to delete the following:</label>
-                <br>
-                <label><strong>ClassID:</strong> 1</label>
-                <label><strong>Instructor:</strong>Steve Smith</label>
-
-                <label><strong>Description:</strong>Zumba</label>
-
-                <label><strong>Date:</strong>2024-05-01</label>
-                <label><strong>Start Time</strong>11:00:00</label>
-                <label><strong>End Time:</strong>11:30:00</label>
-                <label><strong>Room Number:</strong>1</label>
-            </fieldset>
-            <input class="btn" type="submit" id="addClassBtn" value="Delete Class">
-            <input class="btn" type="submit" id="cancelBtn" value="Cancel">
-        </form>
-    </div>
     {% endblock %}

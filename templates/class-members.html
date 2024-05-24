@@ -1,28 +1,30 @@
 {% extends "base.html" %}
 {% block content %}
 <h1>Class-Members</h1>
-<table>
-    <thead>
-        <tr>
-            <th>Class-MemberID</th>
-            <th>Member</th>
-            <th>Class</th>
-            <th>edit</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for item in data %}
-        <tr>
-            <td>{{item['classMemberID']}}</td>
-            <td>{{item['member']}}</td>
-            <td>{{item['class']}}</td>
-            <td><a href="/edit_classMembers/{{item['classMemberID']}}">edit</a></td>
-        </tr>
-        {% endfor %}
+<div id="database">
+    <table>
+        <thead>
+            <tr>
+                <th>Class-MemberID</th>
+                <th>Member</th>
+                <th>Class</th>
+                <th>edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in data %}
+            <tr>
+                <td>{{item['classMemberID']}}</td>
+                <td>{{item['member']}}</td>
+                <td>{{item['class']}}</td>
+                <td><a href="/edit_classMembers/{{item['classMemberID']}}">edit</a></td>
+            </tr>
+            {% endfor %}
 
-    </tbody>
-</table>
-<button type="button">Add member to class</button>
+        </tbody>
+    </table>
+    <button type="button" onClick=showInserts()>Add member to class</button>
+</div>
 
 <div id="insert">
     <p>&nbsp;</p>
@@ -45,7 +47,7 @@
         <input class="btn" type="submit" id="cancelBtn" value="Cancel">
     </form>
 
-    <div id="update">
+    <!-- <div id="update">
         <p>&nbsp;</p>
         <form method="POST" id="adClass">
             <legend><strong>Update Class Member</strong></legend>
@@ -84,6 +86,5 @@
             <input class="btn" type="submit" id="deleteClassBtn" value="Delete Class">
             <input class="btn" type="submit" id="cancelBtn" value="Cancel">
         </form>
-    </div>
-    </body>
+    </div> -->
     {% endblock %}

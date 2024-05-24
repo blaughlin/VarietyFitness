@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1>Employees</h1>
-        <table>
+<h1>Employees</h1>
+<div id="database">
+    <table>
         <tr>
             <th>employeeID</th>
             <th>firstName</th>
@@ -43,22 +44,22 @@
             <td>Fitness Instructor</td>
         </tr>
     </table>
-    <button type="button">Add new employee</button>
+    <button type="button" onClick=showInserts()>Add new employee</button>
+</div>
 
-    <div id="insert">
-        <p>&nbsp;</p>
-        <form method="POST" id="addEmployee">
-            <legend><strong>Add Employee</strong></legend>
-            <fieldset class="field">
-                <label>First Name</label> <input type="text" name="firstName" />
-                <label>Last Name</label> <input type="text" name="lastName" />
-                <label>Hire Date</label> <input type="text" name="hireDate" />
-                <label>Hourly Rate</label> <input type="text" name="hourlyRate" />
-                <label>Membership Start Date</label> <input type="text" name="membershipStartDate" />
-                <label>Job Title</label> <input type="text" name="jobTitle" />
-            </fieldset>
-            <input class="btn" type="submit" id="addEmployeeBtn" value="Add Employee">
-            <input class="btn" type="submit" id="cancelBtn" value="Cancel">
-        </form>
-    </div>
+<div id="insert">
+    <p>&nbsp;</p>
+    <form method="POST" id="addEmployee">
+        <legend><strong>Add Employee</strong></legend>
+        <fieldset class="field">
+            <label>First Name</label> <input type="text" name="firstName" />
+            <label>Last Name</label> <input type="text" name="lastName" />
+            <label>Hire Date</label> <input type="text" name="hireDate" />
+            <label>Hourly Rate</label> <input type="text" name="hourlyRate" />
+            <label>Membership Start Date</label> <input type="text" name="membershipStartDate" />
+            <label>Job Title</label> <input type="text" name="jobTitle" />
+        </fieldset>
+        <input class="btn" type="submit" name="addEmployee" id="addEmployeeBtn" value="Add Employee">
+    </form>
+</div>
 {% endblock %}

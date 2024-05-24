@@ -5,14 +5,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+    <script language=JavaScript>
+        function showTables()
+        {
+            document.getElementById('database').style.display = "block"
+            document.getElementById('insert').style.display = "none"
+        }
 
+        function showInserts()
+        {
+            document.getElementById('database').style.display = "block"
+            document.getElementById('insert').style.display = "block"
+        }
+    </script>
     <title>Variety Fitness</title>
 </head>
 
-<body>
-    [<a href="/">Home</a> | <a href="/members">Members</a> | <a href="/classes">Classes</a> |
-    <a href="/class-members">Class-Members</a> | <a href="employees">Employees</a> |
-    <a href="invoices">Invoices</a> | <a href="member-visits">Member Visits</a>]
+<body onload=showTables()>
+    [<a href="../">Home</a> | <a href="../members">Members</a> | <a href="../classes">Classes</a> |
+    <a href="../class-members">Class-Members</a> | <a href="../employees">Employees</a> |
+    <a href="../invoices">Invoices</a> | <a href="../member-visits">Member Visits</a>]
     {% block content %}
     {% endblock %}
 </body>

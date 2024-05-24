@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 <h1>Members</h1>
-<div class="scrollable">
+<div id="database">
     <table>
         <thead>
             <tr>
@@ -34,8 +34,8 @@
             {% endfor %}
         </tbody>
     </table>
+    <button type="button" onClick=showInserts()>Add new member</button>
 </div>
-<button type="button">Add new member</button>
 
 <div id="insert">
     <p>&nbsp;</p>
@@ -59,6 +59,6 @@
         </fieldset>
         <input class="btn" type="submit" name="addMember" id="addMemberBtn" value="Add Person">
     </form>
-
 </div>
+
 {% endblock %}

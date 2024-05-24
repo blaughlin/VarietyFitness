@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1>Invoices</h1>
+<h1>Invoices</h1>
+<div id="database">
     <table>
         <tr>
             <th>InvoiceID</th>
@@ -27,23 +28,23 @@
             <td>63.00</td>
         </tr>
     </table>
-    <button type="button">Add new invoice</button>
+    <button type="button" onClick=showInserts()>Add new invoice</button>
+</div>
 
-    <div id="insert">
-        <p>&nbsp;</p>
-        <form method="POST" id="addInovice">
-            <legend><strong>Add Invoice</strong></legend>
-            <fieldset class="field">
-                <label>Member</label>
-                <select name="memberID">
-                    <option value="1">John Smith</option>
-                    <option value="2">Sarah Mills</option>
-                    <option value="3">Ben Smith</option>
-                </select>
-                <label>Date</label> <input type="text" name="date" />
-                <label>Amount Due</label> <input type="text" name="amountDue" />
-            </fieldset>
-            <input class="btn" type="submit" id="addInvoiceBtn" value="Add Invoice">
-            <input class="btn" type="submit" id="cancelBtn" value="Cancel">
-        </form>
-{% endblock %}
+<div id="insert">
+    <p>&nbsp;</p>
+    <form method="POST" id="addInovice">
+        <legend><strong>Add Invoice</strong></legend>
+        <fieldset class="field">
+            <label>Member</label>
+            <select name="memberID">
+                <option value="1">John Smith</option>
+                <option value="2">Sarah Mills</option>
+                <option value="3">Ben Smith</option>
+            </select>
+            <label>Date</label> <input type="text" name="date" />
+            <label>Amount Due</label> <input type="text" name="amountDue" />
+        </fieldset>
+        <input class="btn" type="submit" name="addInvoice" id="addInvoiceBtn" value="Add Invoice">
+    </form>
+    {% endblock %}
