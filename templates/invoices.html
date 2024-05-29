@@ -3,31 +3,26 @@
 <h1>Invoices</h1>
 <div id="database">
     <table>
-        <tr>
-            <th>InvoiceID</th>
-            <th>memberID</th>
-            <th>date</th>
-            <th>amountDue</th>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>1</td>
-            <td>2024-05-01</td>
-            <td>70.00</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>3</td>
-            <td>2024-05-01</td>
-            <td>65.00</td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>3</td>
-            <td>2024-05-01</td>
-            <td>63.00</td>
-        </tr>
+        <thead>
+            <tr>
+                <th>Invoice ID</th>
+                <th>Member</th>
+                <th>Date</th>
+                <th>Dues</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in data %}
+            <tr>
+                <td>{{ item.invoiceID }}</td>
+                <td>{{item.member}}</td>
+                <td>{{item.date}}</td>
+                <td>{{item.amountDue}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
     </table>
+    <br>
     <button type="button" onClick=showInserts()>Add new invoice</button>
 </div>
 

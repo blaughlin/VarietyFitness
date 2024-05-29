@@ -182,7 +182,13 @@ def employees():
 
 @app.route('/invoices')
 def invoices():
-    return render_template("invoices.html")
+     if request.method == "GET":
+         query = "SELECT Invoices.invoiceID, Concat(Members.firstName, ' ', Members.lastName) as member, Invoices.date, Invoices.amountDue from Invoices inner join Members on Invoices.memberID = Members.memberID"
+         cur = mysql.connection.cursor()
+         cur.execute(query)
+         invoices = cur.fetchall()
+         print(invoices)
+         return render_template("invoices.html", data = invoices)
 
 # Listener
 
