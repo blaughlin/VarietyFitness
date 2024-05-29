@@ -184,7 +184,14 @@ def membeerVisits():
 
 @app.route('/employees')
 def employees():
-    return render_template("employees.html")
+    if request.method == "GET":
+         query = "SELECT employeeID, CONCAT(firstName ,' ', lastName) as name, hireDate, hourlyRate, jobTitle FROM Employees"
+         cur = mysql.connection.cursor()
+         cur.execute(query)
+         employees = cur.fetchall()
+         print(employees)
+         return render_template("employees.html", data = employees)
+
 
 @app.route('/invoices')
 def invoices():
