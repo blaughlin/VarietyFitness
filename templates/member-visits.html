@@ -3,32 +3,24 @@
 <h1>Member Visits</h1>
 <div id="database">
     <table>
-        <tr>
-            <th>visitID</th>
-            <th>memberID</th>
-            <th>date</th>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>1</td>
-            <td>2024-05-01</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>2</td>
-            <td>2024-05-01</td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>2</td>
-            <td>2024-05-02</td>
-        </tr>
-        <tr>
-            <td>4</td>
-            <td>1</td>
-            <td>2024-05-03</td>
-        </tr>
+        <thead>
+            <tr>
+                <th>Visit ID</th>
+                <th>Member</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in data %}
+            <tr>
+                <td>{{ item.visitID }}</td>
+                <td>{{item.member}}</td>
+                <td>{{item.date}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
     </table>
+    <br>
     <button type="button" onClick=showInserts()>Add visit</button>
 </div>
 

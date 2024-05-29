@@ -174,7 +174,13 @@ def editClassMembers(id):
         
 @app.route('/member-visits')
 def membeerVisits():
-    return render_template("member-visits.html")
+     if request.method == "GET":
+         query = "SELECT MemberVisits.visitID, Concat(Members.firstName, ' ', Members.lastName) as member, MemberVisits.date from MemberVisits inner join Members on MemberVisits.memberID = Members.memberID"
+         cur = mysql.connection.cursor()
+         cur.execute(query)
+         visits = cur.fetchall()
+         print(visits)
+         return render_template("member-visits.html", data = visits)
 
 @app.route('/employees')
 def employees():
