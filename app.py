@@ -188,7 +188,23 @@ def editClassMembers(id):
             cur.execute(query, (memberID, classID, id))
             mysql.connection.commit()
             return redirect("/class-members")
-        
+
+
+@app.route('/delete_classMembers/<int:id>', methods = ['POST', 'GET'])
+def deleteClassMembers(id):
+    if request.method == "GET":
+        query = "SELECT Classes_Members.classMemberID, Concat(Members.firstName, ' ', Members.lastName) as member, Concat(Classes.classDescription, ' ' ,Classes.classDate, ' ', Classes.startTime) as class from Classes_Members inner join Members on Classes_Members.memberID = Members.memberID inner join Classes on Classes_Members.classID = Classes.classID WHERE classMemberID = %s" % (id)
+        cur = mysql.connection.cursor()
+        cur.execute(query)
+        data = cur.fetchall()
+        return render_template('/delete_classMembers.html', data = data)
+    elif request.method == "POST":
+        query = "DELETE FROM Classes_Members WHERE classMemberID = '%s';"
+        cur = mysql.connection.cursor()
+        cur.execute(query, (id,))
+        mysql.connection.commit()
+        return redirect("/class-members")
+          
 @app.route('/member-visits', methods = ['POST', 'GET'])
 def memberVisits():
      if request.method == "GET":

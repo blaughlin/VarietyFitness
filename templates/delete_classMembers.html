@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div id="delete">
+    <p>&nbsp;</p>
+    <form method="POST" id="deleteClassMember">
+        <legend><strong>Delete Member From Class</strong></legend>
+        <fieldset class="field">
+            <label>Are you sure you want to delete the following:</label>
+            <br>
+            <label><strong>Member:</strong> {{data[0].member}}</label>
+            <label><strong>Class:</strong>{{data[0].class}}</label>
+        </fieldset>
+        <input class="btn" type="submit" name="deleteClassMember" id="deleteClassBtn" value="Delete Member From Class">
+    </form>
+</div>
+{% endblock %}
