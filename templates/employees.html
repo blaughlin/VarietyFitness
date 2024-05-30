@@ -25,7 +25,7 @@
         </tbody>
     </table>
     <br>
-    <button type="button" onClick=showInserts()>Add new employee</button>
+    <button class="btn" type="button" onClick=showInserts()>Add new employee</button>
 </div>
 
 <div id="insert">
@@ -33,11 +33,11 @@
     <form method="POST" id="addEmployee">
         <legend><strong>Add Employee</strong></legend>
         <fieldset class="field">
-            <label>First Name</label> <input type="text" name="firstName" />
-            <label>Last Name</label> <input type="text" name="lastName" />
-            <label>Hire Date</label> <input type="text" name="hireDate" placeholder="YYYY-MM-DD" />
-            <label>Hourly Rate</label> <input type="text" name="hourlyRate" />
-            <label>Job Title</label> <input type="text" name="jobTitle" />
+            <label>First Name</label> <input type="text" name="firstName" required />
+            <label>Last Name</label> <input type="text" name="lastName" required />
+            <label>Hire Date</label> <input type="text" name="hireDate" placeholder="YYYY-MM-DD" required />
+            <label>Hourly Rate</label> <input type="text" name="hourlyRate" required />
+            <label>Job Title</label> <input type="text" name="jobTitle" required />
         </fieldset>
         <input class="btn" type="submit" name="addEmployee" id="addEmployeeBtn" value="Add Employee">
     </form>

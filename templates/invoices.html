@@ -23,7 +23,7 @@
         </tbody>
     </table>
     <br>
-    <button type="button" onClick=showInserts()>Add new invoice</button>
+    <button class="btn" type="button" onClick=showInserts()>Add new invoice</button>
 </div>
 
 <div id="insert">
@@ -37,8 +37,8 @@
                 <option value="{{member['memberID']}}">{{member['member']}}</option>
                 {% endfor %}
             </select>
-            <label>Date</label> <input type="text" name="date" placeholder="YYYY-MM-DD" />
-            <label>Amount Due</label> <input type="text" name="amountDue" placeholder="70.00" />
+            <label>Date</label> <input type="text" name="date" placeholder="YYYY-MM-DD" required />
+            <label>Amount Due</label> <input type="text" name="amountDue" placeholder="70.00" required />
         </fieldset>
         <input class="btn" type="submit" name="addInvoice" id="addInvoiceBtn" value="Add Invoice">
     </form>
