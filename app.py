@@ -186,7 +186,6 @@ def memberVisits():
          return render_template("member-visits.html", data = visits, members = members)
      if request.method == "POST":
          if request.form.get("addMemberVisit"):
-             print("in addMemberVisit")
              memberID = request.form["memberID"]
              date = request.form["date"]
              query = "INSERT INTO MemberVisits (memberID, date) VALUES (%s, %s)"
@@ -206,15 +205,28 @@ def employees():
          return render_template("employees.html", data = employees)
 
 
-@app.route('/invoices')
+@app.route('/invoices', methods = ['POST', 'GET'])
 def invoices():
      if request.method == "GET":
          query = "SELECT Invoices.invoiceID, Concat(Members.firstName, ' ', Members.lastName) as member, Invoices.date, Invoices.amountDue from Invoices inner join Members on Invoices.memberID = Members.memberID"
          cur = mysql.connection.cursor()
          cur.execute(query)
          invoices = cur.fetchall()
-         print(invoices)
-         return render_template("invoices.html", data = invoices)
+         query = "SELECT memberID, Concat(firstName, ' ', lastName) as member FROM Members"
+         cur = mysql.connection.cursor()
+         cur.execute(query)
+         members = cur.fetchall()
+         return render_template("invoices.html", data = invoices, members = members)
+     if request.method == "POST":
+         if request.form.get("addInvoice"):
+             memberID = request.form["memberID"]
+             date = request.form["date"]
+             amountDue = request.form["amountDue"]
+             query = "INSERT INTO Invoices (memberID, date, amountDue) VALUES (%s, %s, %2s)"
+             cur = mysql.connection.cursor()
+             cur.execute(query, (memberID, date, amountDue))
+             mysql.connection.commit()
+             return redirect("/invoices")
 
 # Listener
 

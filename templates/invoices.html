@@ -28,17 +28,17 @@
 
 <div id="insert">
     <p>&nbsp;</p>
-    <form method="POST" id="addInovice">
+    <form method="POST" id="addInvoice">
         <legend><strong>Add Invoice</strong></legend>
         <fieldset class="field">
             <label>Member</label>
             <select name="memberID">
-                <option value="1">John Smith</option>
-                <option value="2">Sarah Mills</option>
-                <option value="3">Ben Smith</option>
+                {% for member in members %}
+                <option value="{{member['memberID']}}">{{member['member']}}</option>
+                {% endfor %}
             </select>
-            <label>Date</label> <input type="text" name="date" />
-            <label>Amount Due</label> <input type="text" name="amountDue" />
+            <label>Date</label> <input type="text" name="date" placeholder="YYYY-MM-DD" />
+            <label>Amount Due</label> <input type="text" name="amountDue" placeholder="70.00" />
         </fieldset>
         <input class="btn" type="submit" name="addInvoice" id="addInvoiceBtn" value="Add Invoice">
     </form>
