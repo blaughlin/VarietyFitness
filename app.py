@@ -194,7 +194,7 @@ def memberVisits():
              mysql.connection.commit()
              return redirect("/member-visits")
 
-@app.route('/employees')
+@app.route('/employees', methods = ['POST', 'GET'])
 def employees():
     if request.method == "GET":
          query = "SELECT employeeID, CONCAT(firstName ,' ', lastName) as name, hireDate, hourlyRate, jobTitle FROM Employees"
@@ -203,7 +203,18 @@ def employees():
          employees = cur.fetchall()
          print(employees)
          return render_template("employees.html", data = employees)
-
+    if request.method == "POST":
+        if request.form.get("addEmployee"):
+            firstName = request.form["firstName"]
+            lastName = request.form["lastName"]
+            hireDate = request.form["hireDate"]
+            hourlyRate = request.form["hourlyRate"]
+            jobTitle = request.form["jobTitle"]
+            query = "INSERT INTO Employees (firstName, lastName, hireDate, hourlyRate, jobTitle) VALUES (%s, %s, %s, %s, %s)"
+            cur = mysql.connection.cursor()
+            cur.execute(query, (firstName, lastName, hireDate, hourlyRate, jobTitle))
+            mysql.connection.commit()
+            return redirect("/employees")
 
 @app.route('/invoices', methods = ['POST', 'GET'])
 def invoices():
