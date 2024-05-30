@@ -144,8 +144,25 @@ def classMembeers():
             cur = mysql.connection.cursor()
             cur.execute(query)
             data = cur.fetchall()
-            return render_template("class-members.html", data = data)
-
+            query = "SELECT memberID, Concat(firstName, ' ', lastName) as member FROM Members"
+            cur = mysql.connection.cursor()
+            cur.execute(query)
+            members = cur.fetchall()
+            query = "SELECT classID, Concat(classDescription, ' ', classDate, ' ', startTime) as class FROM Classes"
+            cur = mysql.connection.cursor()
+            cur.execute(query)
+            classes = cur.fetchall()
+            return render_template("class-members.html", data = data, members = members, classes = classes)
+        if request.method == "POST":
+            if request.form.get("addClassMember"):
+                memberID = request.form["memberID"]
+                classID = request.form["classID"]
+                query = "INSERT INTO Classes_Members (memberID, ClassID) VALUES (%s, %s)"
+                cur = mysql.connection.cursor()
+                cur.execute(query, (memberID, classID))
+                mysql.connection.commit()
+                return redirect("/class-members")     
+                      
 @app.route('/edit_classMembers/<int:id>',  methods = ['POST', 'GET'])
 def editClassMembers(id):
     if request.method == "GET":
