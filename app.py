@@ -172,15 +172,28 @@ def editClassMembers(id):
             mysql.connection.commit()
             return redirect("/class-members")
         
-@app.route('/member-visits')
-def membeerVisits():
+@app.route('/member-visits', methods = ['POST', 'GET'])
+def memberVisits():
      if request.method == "GET":
          query = "SELECT MemberVisits.visitID, Concat(Members.firstName, ' ', Members.lastName) as member, MemberVisits.date from MemberVisits inner join Members on MemberVisits.memberID = Members.memberID"
          cur = mysql.connection.cursor()
          cur.execute(query)
          visits = cur.fetchall()
-         print(visits)
-         return render_template("member-visits.html", data = visits)
+         query = "SELECT memberID, Concat(firstName, ' ', lastName) as member FROM Members"
+         cur = mysql.connection.cursor()
+         cur.execute(query)
+         members = cur.fetchall()
+         return render_template("member-visits.html", data = visits, members = members)
+     if request.method == "POST":
+         if request.form.get("addMemberVisit"):
+             print("in addMemberVisit")
+             memberID = request.form["memberID"]
+             date = request.form["date"]
+             query = "INSERT INTO MemberVisits (memberID, date) VALUES (%s, %s)"
+             cur = mysql.connection.cursor()
+             cur.execute(query, (memberID, date))
+             mysql.connection.commit()
+             return redirect("/member-visits")
 
 @app.route('/employees')
 def employees():
