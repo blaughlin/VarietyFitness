@@ -36,14 +36,21 @@
             <label>ClassId: {{ data[0].classID }}</label>
             <label>Instructor</label>
             <select name="employeeID">
+                {% if data[0].instructor == None %}
+                <option value="" selected></option>
                 {% for instructor in instructors %}
-                {% if instructor['instructor'] == data[0].instructor %}
+                <option value="{{instructor['employeeID']}}">{{instructor['instructor']}}</option>
+                {% endfor %}
+                {% else %}
+                {% for instructor in instructors %}
+                {% if data[0].instructor == instructor['instructor'] %}
                 <option value="{{instructor['employeeID']}}" selected>{{instructor['instructor']}}</option>
                 {% else %}
                 <option value="{{instructor['employeeID']}}">{{instructor['instructor']}}</option>
                 {% endif %}
                 {% endfor %}
                 <option value=""></option>
+                {% endif %}
             </select>
             <label>Class Description</label> <input type="text" name="classDescription"
                 value="{{data[0].classDescription}}" />

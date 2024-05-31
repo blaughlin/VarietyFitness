@@ -112,6 +112,8 @@ def editClasses(id):
         cur = mysql.connection.cursor()
         cur.execute(query)
         instructors = cur.fetchall()
+        print(instructors)
+        print(data)
         return render_template("edit_classes.html", data = data, instructors = instructors)
     if request.method == "POST":
         if request.form.get("editClass"):
