@@ -2,6 +2,7 @@
 {% block content %}
 <h1>Members</h1>
 <div id="database">
+    <div class="scrollable">
     <table>
         <thead>
             <tr>
@@ -15,6 +16,8 @@
                 <th>Expiration Month</th>
                 <th>Expiration Year</th>
                 <th>Payment Currert</th>
+                <th>Edit</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -30,10 +33,13 @@
                 <td>{{item['expirationMonth']}}</td>
                 <td>{{item['expirationYear']}}</td>
                 <td>{{item['paymentCurrent']}}</td>
+                <td> <a href="/edit-member/{{item['memberID']}}"> edit </a> </td>
+                <td> <a href="/delete-member/{{item['memberID']}}"> delete </a> </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
+    </div>
     <br>
     <button class="btn" type="button" onClick=showInserts()>Add new member</button>
 </div>

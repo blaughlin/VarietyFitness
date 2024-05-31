@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block content %}
+<h1> Edit Member </h1>
+
+<form method="POST" id="editMember"> 
+<div class="scrollable">
+<table>
+    <thead>
+        <tr>
+            <th>Member ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Membership Start Date</th>
+            <th>Monthly Dues</th>
+            <th>Credit Card</th>
+            <th>Expiration Month</th>
+            <th>Expiration Year</th>
+            <th>Payment Currert</th>
+        
+        </tr>
+
+    </thead>
+
+    <tbody>
+        
+            <tr> 
+                <td>{{data[0]['memberID']}}</td>
+                <td><input type="text" id="firstName" name="firstName" value="{{data[0]['firstName']}}" required/></td>
+                <td><input type="text" id="lastName" name="lastName" value="{{data[0]['lastName']}}" required/></td>
+                <td><input type="email" id="email" name="email" value="{{data[0]['email']}}" required/></td>
+                <td><input type="text" id="phone" name="phone" value="{{data[0]['phone']}}" required/></td>
+                <td><input type="date" id="membershipStartDate" name="membershipStartDate" value="{{data[0]['membershipStartDate']}}" required/></td>
+                <td><input type="text" id="monthlyDues" name="monthlyDues" value="{{data[0]['monthlyDues']}}"/></td>
+                <td><input type="text" id="creditCardNumber" name="creditCardNumber" value="{{data[0]['creditCardNumber']}}" required/></td>
+                <td><input type="text" id="expirationMonth" name="expirationMonth" value="{{data[0]['expirationMonth']}}" required/></td>
+                <td><input type="text" id="expirationYear" name="expirationYear" value="{{data[0]['expirationYear']}}" required/></td>
+                <td><select name="current" id="current">
+                        <option value="0">No</option>
+                        <option value="1" selected>Yes</option>
+                    </select>
+                </td>
+            </tr>
+        
+    </tbody>
+</table>
+</div>
+<input class="btn" type="submit" name="editMember" value="Update Member">
+</form>
+
+
+
+
+{% endblock %}

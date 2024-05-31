@@ -52,6 +52,59 @@ def members():
             mysql.connection.commit()
 
             return redirect("/members")
+        
+
+@app.route('/edit-member/<int:id>', methods = ['POST', 'GET'])
+def editMembers(id):
+    if request.method == "GET":
+        query = "SELECT * FROM Members WHERE memberID = %s" %(id)
+        cur = mysql.connection.cursor()
+        cur.execute(query)
+        data = cur.fetchall()
+        return render_template("edit-member.html", data = data)
+    
+    if request.method == "POST":
+        if request.form.get("editMember"):
+            firstName = request.form["firstName"]
+            lastName = request.form["lastName"]
+            email = request.form["email"]
+            phone = request.form["phone"]
+            membershipStartDate = request.form["membershipStartDate"]
+            monthlyDues = request.form["monthlyDues"]
+            creditCardNumber = request.form["creditCardNumber"]
+            expirationMonth = request.form["expirationMonth"]
+            expirationYear = request.form["expirationYear"]
+            paymentCurrent = request.form["current"]
+
+            attributes = [firstName, lastName, email, phone, membershipStartDate, monthlyDues, creditCardNumber,\
+                          expirationMonth, expirationYear, paymentCurrent]
+            
+            for value in attributes:
+                if value == "":
+                    return redirect("/error")
+
+            query = "UPDATE Members set firstName = %s, lastName = %s, email = %s, phone = %s, membershipStartDate = %s, monthlyDues = %s, creditCardNumber = %s, expirationMonth = %s, expirationYear = %s, paymentCurrent = %s WHERE memberID = %s"
+            cur = mysql.connection.cursor()
+            cur.execute(query, (firstName, lastName, email, phone, membershipStartDate, monthlyDues, creditCardNumber, expirationMonth, expirationYear, paymentCurrent, id))
+            mysql.connection.commit()
+            return redirect("/members")
+        
+@app.route('/delete-member/<int:id>', methods = ['POST', 'GET'])       
+def deleteMember(id):
+    if request.method == "GET":
+        query = "Select * FROM Members WHERE memberID = %s" % (id)
+        cur = mysql.connection.cursor()
+        cur.execute(query)
+        data = cur.fetchall()
+        return render_template('/delete-member.html', data = data)
+
+    elif request.method == "POST":
+        query = "DELETE FROM Members WHERE memberID = %s" % (id)
+        cur = mysql.connection.cursor()
+        cur.execute(query)
+        mysql.connection.commit()
+        return redirect("/members")
+
 
 @app.route('/classes', methods = ['POST', 'GET'])
 def classes():
