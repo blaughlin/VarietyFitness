@@ -3,42 +3,42 @@
 <h1>Members</h1>
 <div id="database">
     <div class="scrollable">
-    <table>
-        <thead>
-            <tr>
-                <th>Member ID</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Membership Start Date</th>
-                <th>Monthly Dues</th>
-                <th>Credit Card</th>
-                <th>Expiration Month</th>
-                <th>Expiration Year</th>
-                <th>Payment Currert</th>
-                <th>Edit</th>
-                <th>Delete</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for item in data %}
-            <tr>
-                <td>{{item['memberID']}}</td>
-                <td>{{item['name']}}</td>
-                <td>{{item['email']}}</td>
-                <td>{{item['phone']}}</td>
-                <td>{{item['membershipStartDate']}}</td>
-                <td>{{item['monthlyDues']}}</td>
-                <td>{{item['creditCardNumber']}}</td>
-                <td>{{item['expirationMonth']}}</td>
-                <td>{{item['expirationYear']}}</td>
-                <td>{{item['paymentCurrent']}}</td>
-                <td> <a href="/edit-member/{{item['memberID']}}"> edit </a> </td>
-                <td> <a href="/delete-member/{{item['memberID']}}"> delete </a> </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+        <table>
+            <thead>
+                <tr>
+                    <th>Member ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Membership Start Date</th>
+                    <th>Monthly Dues</th>
+                    <th>Credit Card</th>
+                    <th>Expiration Month</th>
+                    <th>Expiration Year</th>
+                    <th>Payment Currert</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in data %}
+                <tr>
+                    <td>{{item['memberID']}}</td>
+                    <td>{{item['name']}}</td>
+                    <td>{{item['email']}}</td>
+                    <td>{{item['phone']}}</td>
+                    <td>{{item['membershipStartDate']}}</td>
+                    <td>{{item['monthlyDues']}}</td>
+                    <td>{{item['creditCardNumber']}}</td>
+                    <td>{{item['expirationMonth']}}</td>
+                    <td>{{item['expirationYear']}}</td>
+                    <td>{{item['paymentCurrent']}}</td>
+                    <td> <a href="/edit-member/{{item['memberID']}}"> edit </a> </td>
+                    <td> <a href="/delete-member/{{item['memberID']}}"> delete </a> </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
     <br>
     <button class="btn" type="button" onClick=showInserts()>Add new member</button>
@@ -60,7 +60,7 @@
             <label>Expiration Month</label> <input type="text" name="expirationMonth" placeholder="MM" required />
             <label>Expiration Year</label> <input type="text" name="expirationYear" placeholder="YYYY" required />
             <label>Payment Current</label>
-            <select name=" current">
+            <select name="current">
                 <option value="0">No</option>
                 <option value="1" selected>Yes</option>
             </select>
