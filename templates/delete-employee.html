@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content%}
+
+<h1>Delete Employee</h1>
+
+
+
+<form method="POST" id="deleteEmployee">
+
+<div id="delete">
+<h2>Are you sure you want to delete the following employee? </h2>
+    <div class="scrollable">
+        <table>
+            <thead>
+                <tr>
+                    <th>Employee ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Hire Date</th>
+                    <th>Hourly Rate</th>
+                    <th>Job Title</th>
+                    
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    
+                {% for key in data[0].keys() %}
+
+                        <td>{{data[0][key]}}</td>
+                {% endfor %}
+
+                </tr>
+
+            </tbody>
+        </table>    
+            
+    </div>
+    <input class="btn" type="submit" name="deleteEmployee" value="Delete Employee">
+</div>
+
+</form>
+
+{% endblock %}

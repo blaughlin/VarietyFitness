@@ -303,6 +303,48 @@ def employees():
             cur.execute(query, (firstName, lastName, hireDate, hourlyRate, jobTitle))
             mysql.connection.commit()
             return redirect("/employees")
+        
+@app.route('/edit-employee/<int:id>', methods = ['POST', 'GET'])
+def editEmployees(id):
+    
+    if request.method == "GET":
+        query = "SELECT * FROM Employees WHERE employeeID = %s" %(id)
+        cur = mysql.connection.cursor()
+        cur.execute(query)
+        data = cur.fetchall()
+        return render_template("edit-employee.html", data = data)
+    
+    if request.method == "POST":
+        if request.form.get("editEmployee"):
+            firstName = request.form['firstName']
+            lastName = request.form['lastName']
+            hireDate = request.form['hireDate']
+            hourlyRate = request.form['hourlyRate']
+            jobTitle = request.form['jobTitle']
+
+            query = "UPDATE Employees SET firstName = %s, lastName = %s, hireDate = %s, hourlyRate = %s, jobTitle = %s WHERE employeeID = %s"
+            cur = mysql.connection.cursor()
+            cur.execute(query, (firstName, lastName, hireDate, hourlyRate, jobTitle, id))
+            mysql.connection.commit()
+            return redirect("/employees")
+        
+@app.route('/delete-employee/<int:id>', methods = ['POST', 'GET'])       
+def deleteEmployee(id):
+    if request.method == "GET":
+        query = "Select * FROM Employees WHERE employeeID = %s" % (id)
+        cur = mysql.connection.cursor()
+        cur.execute(query)
+        data = cur.fetchall()
+        return render_template('/delete-employee.html', data = data)
+
+    elif request.method == "POST":
+        query = "DELETE FROM Employees WHERE employeeID = %s" % (id)
+        cur = mysql.connection.cursor()
+        cur.execute(query)
+        mysql.connection.commit()
+        return redirect("/employees")
+
+
 
 @app.route('/invoices', methods = ['POST', 'GET'])
 def invoices():
