@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Edit Employee</h1>
+
+<form method="POST" id="editEmployee"> 
+<div class="scrollable">
+    <table>
+        <thead>
+            <tr>
+                <th>Employee ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Hire Date</th>
+                <th>Hourly Rate</th>
+                <th>Job Title</th>
+            </tr>
+
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{data[0]['employeeID']}}</td>
+                <td><input type="text" id="firstName" name="firstName" value="{{data[0]['firstName']}}"/></td>
+                <td><input type="text" id="lastName" name="lastName" value="{{data[0]['lastName']}}"/></td>
+                <td><input type="date" id="hireDate" name="hireDate" value="{{data[0]['hireDate']}}"/></td>
+                <td><input type="text" id="hourlyRate" name="hourlyRate" value="{{data[0]['hourlyRate']}}"/></td>
+                <td><input type="text" id="jobTitle" name="jobTitle" value="{{data[0]['jobTitle']}}"/></td>
+            </tr>
+        </tbody>
+
+
+    </table>
+</div>
+<input class="btn" type="submit" name="editEmployee" value="Update Employee">
+</form>
+
+
+
+
+
+
+{% endblock %}

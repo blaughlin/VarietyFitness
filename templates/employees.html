@@ -10,6 +10,9 @@
                 <th>Hire Date</th>
                 <th>Hourly Rate</th>
                 <th>Job Title</th>
+                <th>edit</th>
+                <th>delete</th>
+                
             </tr>
         </thead>
         <tbody>
@@ -20,6 +23,8 @@
                 <td>{{item['hireDate']}}</td>
                 <td>{{item['hourlyRate']}}</td>
                 <td>{{item['jobTitle']}}</td>
+                <td> <a href="/edit-employee/{{item['employeeID']}}"> edit </a> </td>
+                <td> <a href="/delete-employee/{{item['employeeID']}}"> delete </a> </td>
             </tr>
             {% endfor %}
         </tbody>
