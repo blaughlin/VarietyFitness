@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Edit Invoice</h1>
+
+
+<form method="POST" id="editInvoice">
+<table>
+    <thead>
+        <tr>
+            <th> Invoice ID</th>
+            <th> Member </th>
+            <th> Date </th>
+            <th> Amount Due </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            <td>{{data[0].invoiceID}}</td>
+            <td><select name="memberID">
+                    {% for member in members %}
+                    {% if member.memberID == data[0].memberID %}  
+                     <option value="{{member.memberID}}" selected> {{member['member']}}</option>
+                    {% else %}
+                    <option value="{{member.memberID}}"> {{member['member']}}</option>
+                    {% endif %}
+                    {% endfor %}
+                </select> 
+            </td>
+            <td> <input type="date" name="date" value="{{data[0].date}}"> </td>
+            <td> <input type="text" name="amountDue" value="{{data[0].amountDue}}"></td> 
+
+        </tr>
+
+    </tbody>
+
+
+</table>
+
+<input class="btn" type="submit" name="editInvoice" value="Update Invoice">
+
+</form>
+
+{% endblock %}
+
+    

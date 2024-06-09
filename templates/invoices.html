@@ -9,6 +9,8 @@
                 <th>Member</th>
                 <th>Date</th>
                 <th>Dues</th>
+                <th>edit</th>
+                <th>delete</th>
             </tr>
         </thead>
         <tbody>
@@ -18,6 +20,8 @@
                 <td>{{item.member}}</td>
                 <td>{{item.date}}</td>
                 <td>{{item.amountDue}}</td>
+                <td><a href="/edit-invoice/{{item.invoiceID}}">edit</a></td>
+                <td><a href="/delete-invoice/{{item.invoiceID}}">delete</a></td>                
             </tr>
             {% endfor %}
         </tbody>

@@ -368,6 +368,55 @@ def invoices():
              cur.execute(query, (memberID, date, amountDue))
              mysql.connection.commit()
              return redirect("/invoices")
+         
+
+@app.route("/edit-invoice/<int:id>", methods = ['POST', 'GET'])
+def editInvoice(id):
+    if request.method == "GET":
+
+        query = "SELECT Invoices.invoiceID, Concat(Members.firstName, ' ', Members.lastName) as member, Invoices.memberID, Invoices.date, Invoices.amountDue from Invoices inner join Members on Invoices.memberID = Members.memberID where Invoices.invoiceID = %s" % (id)
+        cur = mysql.connection.cursor()
+        cur.execute(query)
+        data = cur.fetchall()
+
+        query2 = "SELECT memberID, Concat(firstName, ' ', lastName) as member FROM Members"
+        cur = mysql.connection.cursor()
+        cur.execute(query2)
+        members = cur.fetchall()
+        return render_template("edit-invoice.html", data = data, members = members)
+    
+    if request.method == "POST":
+        if request.form.get("editInvoice"):
+
+            memberID = request.form["memberID"]
+            date = request.form["date"]
+            amountDue = request.form["amountDue"]
+
+            query = "UPDATE Invoices SET memberID = %s, date = %s, amountDue = %s WHERE invoiceID = %s"
+            cur = mysql.connection.cursor()
+            cur.execute(query, (memberID, date, amountDue, id))
+            mysql.connection.commit()
+            return redirect("/invoices")
+        
+
+@app.route('/delete-invoice/<int:id>', methods = ['POST', 'GET'])       
+def deleteInvoice(id):
+    if request.method == "GET":
+        query = "SELECT Invoices.invoiceID, Concat(Members.firstName, ' ', Members.lastName) as member, Invoices.date, Invoices.amountDue from Invoices inner join Members on Invoices.memberID = Members.memberID where Invoices.invoiceID = %s" % (id)
+        cur = mysql.connection.cursor()
+        cur.execute(query)
+        data = cur.fetchall()
+        return render_template("delete-invoice.html", data = data)
+
+    if request.method == "POST":
+        query = "DELETE FROM Invoices WHERE invoiceID = %s"%(id)
+        cur = mysql.connection.cursor()
+        cur.execute(query)
+        mysql.connection.commit()
+        return redirect("/invoices")
+
+
+
 
 # Listener
 

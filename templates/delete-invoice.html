@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Delete Invoice</h1>
+
+<p></p>
+
+<h2>Are you sure you want to delete the following Invoice?</h2>
+
+<form method="POST" id="deleteInvoice">
+
+<table>
+    <thead>
+        <tr>
+            <th>Invoice ID</th>
+            <th>Member</th>
+            <th>Date</th>
+            <th>Amount Due</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        <tr>
+            <td>{{ data[0].invoiceID }}</td>
+            <td>{{data[0].member}}</td>
+            <td>{{data[0].date}}</td>
+            <td>{{data[0].amountDue}}</td>
+
+    </tbody>
+
+</table>
+
+<input class="btn" type="submit" name="deleteInvoice" value="Delete Invoice">
+
+</form>
+
+
+
+
+{% endblock %}
