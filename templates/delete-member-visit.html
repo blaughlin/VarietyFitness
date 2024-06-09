@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Delete Member Visit<p></p>
+
+<h2>Are you sure you want to delete the following Member-Visit?</h2>
+
+<form method="POST" id="deleteVisit">
+
+<table>
+    <thead>
+        <tr>
+            <th>Visit ID</th>
+            <th>Member</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        <tr>
+            <td>{{ data[0].visitID }}</td>
+            <td>{{data[0].member}}</td>
+            <td>{{data[0].date}}</td>
+        </tr>
+
+
+    </tbody>
+
+</table>
+
+<input class="btn" type="submit" name="deleteVisit" value="Delete Visit">
+
+</form>
+
+
+{% endblock %}

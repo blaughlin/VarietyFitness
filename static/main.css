@@ -54,6 +54,7 @@ main {
 
 /*  ----- Table ----- */
 table {
+  border-collapse: collapse;
   .table {
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
