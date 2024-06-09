@@ -8,6 +8,8 @@
                 <th>Visit ID</th>
                 <th>Member</th>
                 <th>Date</th>
+                <th>edit</th>
+                <th>delete</th>
             </tr>
         </thead>
         <tbody>
@@ -16,6 +18,8 @@
                 <td>{{ item.visitID }}</td>
                 <td>{{item.member}}</td>
                 <td>{{item.date}}</td>
+                <td><a href="/edit-member-visit/{{item.visitID}}">edit</a></td>
+                <td><a href="/delete-member-visit/{{item.visitID}}">delete</a></td>                
             </tr>
             {% endfor %}
         </tbody>

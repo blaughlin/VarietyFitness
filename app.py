@@ -281,6 +281,52 @@ def memberVisits():
              cur.execute(query, (memberID, date))
              mysql.connection.commit()
              return redirect("/member-visits")
+         
+         
+@app.route('/delete-member-visit/<int:id>', methods = ['POST', 'GET'])
+def deleteVisit(id):
+    if request.method == "GET":
+        query = "SELECT MemberVisits.visitID, Concat(Members.firstName, ' ', Members.lastName) as member, MemberVisits.date from MemberVisits inner join Members on MemberVisits.memberID = Members.memberID WHERE MemberVisits.visitID = %s" %(id)
+        cur = mysql.connection.cursor()
+        cur.execute(query)
+        visits = cur.fetchall()
+        # query = "SELECT memberID, Concat(firstName, ' ', lastName) as member FROM Members"
+        # cur = mysql.connection.cursor()
+        # cur.execute(query)
+        # members = cur.fetchall()
+        return render_template("delete-member-visit.html", data = visits)
+    
+    if request.method == "POST":
+        query = "DELETE FROM MemberVisits WHERE visitID = %s" %(id)
+        cur = mysql.connection.cursor()
+        cur.execute(query)
+        mysql.connection.commit()
+        return redirect("/member-visits")
+    
+
+@app.route('/edit-member-visit/<int:id>', methods = ['POST', 'GET'])
+def editVisit(id):
+    if request.method == "GET":
+        query = "SELECT MemberVisits.visitID, Concat(Members.firstName, ' ', Members.lastName) as member, MemberVisits.memberID, MemberVisits.date from MemberVisits inner join Members on MemberVisits.memberID = Members.memberID WHERE MemberVisits.visitID = %s" %(id)
+        cur = mysql.connection.cursor()
+        cur.execute(query)
+        visits = cur.fetchall()
+        query = "SELECT memberID, Concat(firstName, ' ', lastName) as member FROM Members"
+        cur = mysql.connection.cursor()
+        cur.execute(query)
+        members = cur.fetchall()
+        return render_template("edit-member-visit.html", data = visits, members = members)
+    
+    if request.method == "POST":
+        memberID = request.form['memberID']
+        date = request.form['date']
+        query = "UPDATE MemberVisits SET memberID = %s, date = %s WHERE visitID = %s"
+        cur = mysql.connection.cursor()
+        cur.execute(query, (memberID, date, id))
+        mysql.connection.commit()
+        return redirect("/member-visits")
+
+
 
 @app.route('/employees', methods = ['POST', 'GET'])
 def employees():

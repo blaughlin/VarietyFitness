@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Edit Member Visit</h1>
+
+
+<form method="POST" id="editVisit">
+    <table>
+        <thead>
+            <tr>
+                <th>Visit ID</th>
+                <th>Member</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+
+    <tbody>
+        <tr>
+            <td>{{data[0].visitID}}</td>
+            <td><select name="memberID">
+                    {% for member in members %}
+                    {% if member.memberID == data[0].memberID %}
+                    <option value="{{member['memberID']}}" selected>{{member['member']}}</option>
+                    {% else %}
+                    <option value="{{member['memberID']}}">{{member['member']}}</option>
+                    {% endif %}
+                    {% endfor %}
+                </select> 
+            </td>
+            <td> <input type="date" name="date" value="{{data[0].date}}"></td>
+        </tr>
+
+    </tbody>
+    </table>
+
+<input class="btn" type="submit" name="editVisit" value="Update Member Visit">
+
+</form>
+
+{% endblock %}
