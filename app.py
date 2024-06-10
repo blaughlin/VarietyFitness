@@ -167,7 +167,7 @@ def editClasses(id):
         instructors = cur.fetchall()
         print(instructors)
         print(data)
-        return render_template("edit_classes.html", data = data, instructors = instructors)
+        return render_template("edit_class.html", data = data, instructors = instructors)
     if request.method == "POST":
         if request.form.get("editClass"):
             instructor = request.form['employeeID']
@@ -233,7 +233,7 @@ def editClassMembers(id):
         cur = mysql.connection.cursor()
         cur.execute(query)
         classes = cur.fetchall()
-        return render_template("edit_class-members.html", data = data, members = members, classes= classes)
+        return render_template("edit-class-member.html", data = data, members = members, classes= classes)
     if request.method == "POST":
         if request.form.get("editClassMember"):
             memberID = request.form["memberID"]

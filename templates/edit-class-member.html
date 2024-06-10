@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Edit Class-Member</h1>
+
+<form method="POST" id="editClassMember"> 
+<div class="scrollable">
+    <table>
+        <thead>
+            <tr>
+                <th>Class-Member ID</th>
+                <th>Member</th>
+                <th>Class</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{data[0]['classMemberID']}}</td>
+                <td>
+                    <select name="memberID">
+                        {% for member in members %}
+                        {% if member['member'] == data[0].member %}
+                        <option value="{{member['memberID']}}" selected>{{member['member']}}</option>
+                        {% else %}
+                        <option value="{{member['memberID']}}">{{member['member']}}</option>
+                        {% endif %}
+        
+                        {% endfor %}
+                    </select>
+                </td>
+
+                <td>
+                    <select name="classID">
+                        {% for class in classes %}
+                        {% if class['class'] == data[0].class %}
+                        <option value="{{class['classID']}}" selected>{{class['class']}}</option>
+                        {% else %}
+                        <option value="{{class['classID']}}">{{class['class']}}</option>
+                        {% endif %}
+                        {% endfor %}
+                    </select>
+                </td>
+        </tbody>
+
+
+    </table>
+</div>
+<input class="btn" type="submit" name="editClassMember" value="Update Class-Member">
+</form>
+
+{% endblock %}

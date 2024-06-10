@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Edit Class</h1>
+
+<form method="POST" id="editClass"> 
+<div class="scrollable">
+    <table>
+        <thead>
+            <tr>
+                <th>Class ID</th>
+                <th>Instructor</th>
+                <th>Class Description</th>
+                <th>Class Date</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>Room Number</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{data[0]['classID']}}</td>
+                <td>
+                    <select name="employeeID">
+                        {% for instructor in instructors %}
+                        {% if instructor['instructor'] == data[0].instructor %}
+                        <option value="{{instructor['employeeID']}}" selected>{{instructor['instructor']}}</option>
+                        {% else %}
+                        <option value="{{instructor['employeeID']}}">{{instructor['instructor']}}</option>
+                        {% endif %}
+                        {% endfor %}
+                        <option value=""></option>
+                    </select>
+
+                </td>
+                <td><input type="text" name="classDescription" value="{{data[0]['classDescription']}}" required/></td>
+                <td><input type="date" name="classDate" value="{{data[0]['classDate']}}" required/></td>
+                <td><input type="text" name="startTime" value="{{data[0]['startTime']}}" required/></td>
+                <td><input type="text" name="endTime" value="{{data[0]['endTime']}}" required/></td>
+                <td><input type="text" name="roomNumber" value="{{data[0]['roomNumber']}}" required/></td>
+            </tr>
+        </tbody>
+
+
+    </table>
+</div>
+<input class="btn" type="submit" name="editClass" value="Update Class">
+</form>
+
+
+
+
+
+
+{% endblock %}
