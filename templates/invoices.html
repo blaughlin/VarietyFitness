@@ -41,7 +41,7 @@
                 <option value="{{member['memberID']}}">{{member['member']}}</option>
                 {% endfor %}
             </select>
-            <label>Date</label> <input type="text" name="date" placeholder="YYYY-MM-DD" required />
+            <label>Date</label> <input type="date" name="date" placeholder="YYYY-MM-DD" required />
             <label>Amount Due</label> <input type="text" name="amountDue" placeholder="70.00" required />
         </fieldset>
         <input class="btn" type="submit" name="addInvoice" id="addInvoiceBtn" value="Add Invoice">
