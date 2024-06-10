@@ -1,17 +1,41 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div id="delete">
-    <p>&nbsp;</p>
-    <form method="POST" id="deleteClassMember">
-        <legend><strong>Delete Member From Class</strong></legend>
-        <fieldset class="field">
-            <label>Are you sure you want to delete the following:</label>
-            <br>
-            <label><strong>Member:</strong> {{data[0].member}}</label>
-            <label><strong>Class:</strong>{{data[0].class}}</label>
-        </fieldset>
-        <input class="btn" type="submit" name="deleteClassMember" id="deleteClassBtn" value="Delete Member From Class">
-    </form>
-</div>
+
+
+
+<h1>Delete Class Member</h1>
+
+<p></p>
+
+<h2>Are you sure you want to delete the following Class Member?</h2>
+
+<form method="POST" id="deleteClassMember">
+
+<table>
+    <thead>
+        <tr>
+            <th>Class Member ID</th>
+            <th>Member</th>
+            <th>Class</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        <tr>
+            <td>{{ data[0].classMemberID}}</td>
+            <td>{{data[0].member}}</td>
+            <td>{{data[0].class}}</td>
+        </tr>
+
+    </tbody>
+
+</table>
+
+<input class="btn" type="submit" name="deleteClassMember" value="Delete Class Member">
+
+</form>
+
+
+
 {% endblock %}
