@@ -2,7 +2,8 @@
 ## Authors: Bernard Laughlin, Raul Preciado
 ## Last Updated: 6/10/2024
 
-## Code based off of "https://github.com/osu-cs340-ecampus/flask-starter-app?tab=readme-ov-file"
+## All project Code was adapted from: "https://github.com/osu-cs340-ecampus/flask-starter-app?tab=readme-ov-file"
+## last accessed on 6/10/2024
 
 from flask import Flask, render_template, json, redirect
 from flask_mysqldb import MySQL
@@ -13,9 +14,9 @@ import os
 app = Flask(__name__)
 
 app.config['MYSQL_HOST'] = 'classmysql.engr.oregonstate.edu'
-app.config['MYSQL_USER'] = 'cs340_laughlbe'
-app.config['MYSQL_PASSWORD'] = '0077' #last 4 of onid
-app.config['MYSQL_DB'] = 'cs340_laughlbe'
+app.config['MYSQL_USER'] = ''
+app.config['MYSQL_PASSWORD'] = '' #last 4 of onid
+app.config['MYSQL_DB'] = ''
 app.config['MYSQL_CURSORCLASS'] = "DictCursor"
 
 mysql = MySQL(app)
