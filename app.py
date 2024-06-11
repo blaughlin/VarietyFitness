@@ -1,6 +1,7 @@
 ## CS340 Spring 2024 Project: Variety Fitness
-## Bernard Laughlin, Raul Preciado
-## 5/23/2024
+## Authors: Bernard Laughlin, Raul Preciado
+## Last Updated: 6/10/2024
+
 ## Code based off of "https://github.com/osu-cs340-ecampus/flask-starter-app?tab=readme-ov-file"
 
 from flask import Flask, render_template, json, redirect
@@ -19,11 +20,16 @@ app.config['MYSQL_CURSORCLASS'] = "DictCursor"
 
 mysql = MySQL(app)
 
+# The rest of this file is a series of blocks consisting of route handler functions
+# each block contains the handler functions for each entity
 
-# Routes 
+
 @app.route('/')
 def root():
     return render_template("main.j2")
+
+#--------------------------------------------------------------------------------------------------
+#      routes relating to the Members entity
 
 @app.route('/members', methods = ['POST', 'GET'])
 def members():
@@ -33,6 +39,7 @@ def members():
         cur.execute(query)
         data = cur.fetchall()
         return render_template("members.html", data = data)
+    
     if request.method == "POST":
         if request.form.get("addMember"):
             firstName = request.form["firstName"]
@@ -75,14 +82,6 @@ def editMembers(id):
             expirationMonth = request.form["expirationMonth"]
             expirationYear = request.form["expirationYear"]
             paymentCurrent = request.form["current"]
-
-            attributes = [firstName, lastName, email, phone, membershipStartDate, monthlyDues, creditCardNumber,\
-                          expirationMonth, expirationYear, paymentCurrent]
-            
-            for value in attributes:
-                if value == "":
-                    return redirect("/error")
-
             query = "UPDATE Members set firstName = %s, lastName = %s, email = %s, phone = %s, membershipStartDate = %s, monthlyDues = %s, creditCardNumber = %s, expirationMonth = %s, expirationYear = %s, paymentCurrent = %s WHERE memberID = %s"
             cur = mysql.connection.cursor()
             cur.execute(query, (firstName, lastName, email, phone, membershipStartDate, monthlyDues, creditCardNumber, expirationMonth, expirationYear, paymentCurrent, id))
@@ -105,6 +104,9 @@ def deleteMember(id):
         mysql.connection.commit()
         return redirect("/members")
 
+#--------------------------------------------------------------------------------------------------
+#     routes relating to the Classes entity
+
 
 @app.route('/classes', methods = ['POST', 'GET'])
 def classes():
@@ -118,6 +120,7 @@ def classes():
         cur.execute(query)
         instructors = cur.fetchall()
         return render_template("classes.html", data = data, instructors = instructors)
+    
     if request.method == "POST":
         if request.form.get("addClass"):
             employeeID = request.form["employeeID"]
@@ -138,6 +141,7 @@ def classes():
                 cur.execute(query, (employeeID, classDescription, classDate, startTime, endTime, roomNumber))
                 mysql.connection.commit()
                 return redirect("/classes")
+            
 
 @app.route('/delete_class/<int:id>', methods = ['POST', 'GET'])
 def deleteClass(id):
@@ -147,12 +151,14 @@ def deleteClass(id):
         cur.execute(query)
         data = cur.fetchall()
         return render_template('/delete_class.html', data = data)
+    
     elif request.method == "POST":
         query = "DELETE FROM Classes WHERE classID = '%s';"
         cur = mysql.connection.cursor()
         cur.execute(query, (id,))
         mysql.connection.commit()
         return redirect("/classes")
+    
 
 @app.route('/edit_class/<int:id>', methods = ['POST', 'GET'])
 def editClasses(id):
@@ -168,6 +174,7 @@ def editClasses(id):
         print(instructors)
         print(data)
         return render_template("edit_class.html", data = data, instructors = instructors)
+    
     if request.method == "POST":
         if request.form.get("editClass"):
             instructor = request.form['employeeID']
@@ -191,6 +198,8 @@ def editClasses(id):
             mysql.connection.commit()
             return redirect("/classes")
 
+#--------------------------------------------------------------------------------------------------
+#     routes relating to the ClassMembers entity
 
 @app.route('/class-members',  methods = ['POST', 'GET'])
 def classMembeers():
@@ -208,6 +217,7 @@ def classMembeers():
             cur.execute(query)
             classes = cur.fetchall()
             return render_template("class-members.html", data = data, members = members, classes = classes)
+        
         if request.method == "POST":
             if request.form.get("addClassMember"):
                 memberID = request.form["memberID"]
@@ -216,7 +226,8 @@ def classMembeers():
                 cur = mysql.connection.cursor()
                 cur.execute(query, (memberID, classID))
                 mysql.connection.commit()
-                return redirect("/class-members")     
+                return redirect("/class-members")
+                 
                       
 @app.route('/edit_classMembers/<int:id>',  methods = ['POST', 'GET'])
 def editClassMembers(id):
@@ -234,6 +245,7 @@ def editClassMembers(id):
         cur.execute(query)
         classes = cur.fetchall()
         return render_template("edit-class-member.html", data = data, members = members, classes= classes)
+    
     if request.method == "POST":
         if request.form.get("editClassMember"):
             memberID = request.form["memberID"]
@@ -253,12 +265,16 @@ def deleteClassMembers(id):
         cur.execute(query)
         data = cur.fetchall()
         return render_template('/delete_classMembers.html', data = data)
+    
     elif request.method == "POST":
         query = "DELETE FROM Classes_Members WHERE classMemberID = '%s';"
         cur = mysql.connection.cursor()
         cur.execute(query, (id,))
         mysql.connection.commit()
         return redirect("/class-members")
+    
+#--------------------------------------------------------------------------------------------------
+#     routes relating to the MemberVisits entity
           
 @app.route('/member-visits', methods = ['POST', 'GET'])
 def memberVisits():
@@ -272,6 +288,7 @@ def memberVisits():
          cur.execute(query)
          members = cur.fetchall()
          return render_template("member-visits.html", data = visits, members = members)
+     
      if request.method == "POST":
          if request.form.get("addMemberVisit"):
              memberID = request.form["memberID"]
@@ -290,10 +307,6 @@ def deleteVisit(id):
         cur = mysql.connection.cursor()
         cur.execute(query)
         visits = cur.fetchall()
-        # query = "SELECT memberID, Concat(firstName, ' ', lastName) as member FROM Members"
-        # cur = mysql.connection.cursor()
-        # cur.execute(query)
-        # members = cur.fetchall()
         return render_template("delete-member-visit.html", data = visits)
     
     if request.method == "POST":
@@ -326,7 +339,8 @@ def editVisit(id):
         mysql.connection.commit()
         return redirect("/member-visits")
 
-
+#--------------------------------------------------------------------------------------------------
+#     routes relating to the Employees entity
 
 @app.route('/employees', methods = ['POST', 'GET'])
 def employees():
@@ -337,6 +351,7 @@ def employees():
          employees = cur.fetchall()
          print(employees)
          return render_template("employees.html", data = employees)
+    
     if request.method == "POST":
         if request.form.get("addEmployee"):
             firstName = request.form["firstName"]
@@ -350,9 +365,9 @@ def employees():
             mysql.connection.commit()
             return redirect("/employees")
         
+        
 @app.route('/edit-employee/<int:id>', methods = ['POST', 'GET'])
 def editEmployees(id):
-    
     if request.method == "GET":
         query = "SELECT * FROM Employees WHERE employeeID = %s" %(id)
         cur = mysql.connection.cursor()
@@ -367,7 +382,6 @@ def editEmployees(id):
             hireDate = request.form['hireDate']
             hourlyRate = request.form['hourlyRate']
             jobTitle = request.form['jobTitle']
-
             query = "UPDATE Employees SET firstName = %s, lastName = %s, hireDate = %s, hourlyRate = %s, jobTitle = %s WHERE employeeID = %s"
             cur = mysql.connection.cursor()
             cur.execute(query, (firstName, lastName, hireDate, hourlyRate, jobTitle, id))
@@ -390,7 +404,8 @@ def deleteEmployee(id):
         mysql.connection.commit()
         return redirect("/employees")
 
-
+#--------------------------------------------------------------------------------------------------
+#   routes relating to the Invoices entity
 
 @app.route('/invoices', methods = ['POST', 'GET'])
 def invoices():
@@ -404,6 +419,7 @@ def invoices():
          cur.execute(query)
          members = cur.fetchall()
          return render_template("invoices.html", data = invoices, members = members)
+     
      if request.method == "POST":
          if request.form.get("addInvoice"):
              memberID = request.form["memberID"]
@@ -419,12 +435,10 @@ def invoices():
 @app.route("/edit-invoice/<int:id>", methods = ['POST', 'GET'])
 def editInvoice(id):
     if request.method == "GET":
-
         query = "SELECT Invoices.invoiceID, Concat(Members.firstName, ' ', Members.lastName) as member, Invoices.memberID, Invoices.date, Invoices.amountDue from Invoices inner join Members on Invoices.memberID = Members.memberID where Invoices.invoiceID = %s" % (id)
         cur = mysql.connection.cursor()
         cur.execute(query)
         data = cur.fetchall()
-
         query2 = "SELECT memberID, Concat(firstName, ' ', lastName) as member FROM Members"
         cur = mysql.connection.cursor()
         cur.execute(query2)
@@ -433,11 +447,9 @@ def editInvoice(id):
     
     if request.method == "POST":
         if request.form.get("editInvoice"):
-
             memberID = request.form["memberID"]
             date = request.form["date"]
             amountDue = request.form["amountDue"]
-
             query = "UPDATE Invoices SET memberID = %s, date = %s, amountDue = %s WHERE invoiceID = %s"
             cur = mysql.connection.cursor()
             cur.execute(query, (memberID, date, amountDue, id))
